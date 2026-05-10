@@ -1,48 +1,48 @@
-export type NxTheme = 'light' | 'dark' | 'ocean' | 'rose' | 'slate' | 'forest' | 'amber' | 'custom'
+export type NxTheme = 'light' | 'dark' | 'ocean' | 'rose' | 'slate' | 'forest' | 'amber' | 'custom';
 
 export interface ThemeTokens {
-  '--nx-bg': string
-  '--nx-surface': string
-  '--nx-surface-alt': string
-  '--nx-border': string
-  '--nx-border-light': string
-  '--nx-text': string
-  '--nx-text-muted': string
-  '--nx-text-faint': string
-  '--nx-accent': string
-  '--nx-accent-hover': string
-  '--nx-accent-text': string
-  '--nx-today-bg': string
-  '--nx-today-ring': string
-  '--nx-weekend-bg': string
-  '--nx-header-bg': string
-  '--nx-header-text': string
-  '--nx-hover': string
-  '--nx-shadow': string
-  '--nx-radius': string
+  '--nx-bg': string;
+  '--nx-surface': string;
+  '--nx-surface-alt': string;
+  '--nx-border': string;
+  '--nx-border-light': string;
+  '--nx-text': string;
+  '--nx-text-muted': string;
+  '--nx-text-faint': string;
+  '--nx-accent': string;
+  '--nx-accent-hover': string;
+  '--nx-accent-text': string;
+  '--nx-today-bg': string;
+  '--nx-today-ring': string;
+  '--nx-weekend-bg': string;
+  '--nx-header-bg': string;
+  '--nx-header-text': string;
+  '--nx-hover': string;
+  '--nx-shadow': string;
+  '--nx-radius': string;
 }
 
 export interface CustomThemeInput {
-  name?: string
-  '--nx-bg'?: string
-  '--nx-surface'?: string
-  '--nx-surface-alt'?: string
-  '--nx-border'?: string
-  '--nx-border-light'?: string
-  '--nx-text'?: string
-  '--nx-text-muted'?: string
-  '--nx-text-faint'?: string
-  '--nx-accent'?: string
-  '--nx-accent-hover'?: string
-  '--nx-accent-text'?: string
-  '--nx-today-bg'?: string
-  '--nx-today-ring'?: string
-  '--nx-weekend-bg'?: string
-  '--nx-header-bg'?: string
-  '--nx-header-text'?: string
-  '--nx-hover'?: string
-  '--nx-shadow'?: string
-  '--nx-radius'?: string
+  name?: string;
+  '--nx-bg'?: string;
+  '--nx-surface'?: string;
+  '--nx-surface-alt'?: string;
+  '--nx-border'?: string;
+  '--nx-border-light'?: string;
+  '--nx-text'?: string;
+  '--nx-text-muted'?: string;
+  '--nx-text-faint'?: string;
+  '--nx-accent'?: string;
+  '--nx-accent-hover'?: string;
+  '--nx-accent-text'?: string;
+  '--nx-today-bg'?: string;
+  '--nx-today-ring'?: string;
+  '--nx-weekend-bg'?: string;
+  '--nx-header-bg'?: string;
+  '--nx-header-text'?: string;
+  '--nx-hover'?: string;
+  '--nx-shadow'?: string;
+  '--nx-radius'?: string;
 }
 
 const defaultTokens: ThemeTokens = {
@@ -65,7 +65,7 @@ const defaultTokens: ThemeTokens = {
   '--nx-hover': '#f3f4f6',
   '--nx-shadow': '0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1)',
   '--nx-radius': '0.75rem',
-}
+};
 
 export const themes: Record<NxTheme, ThemeTokens> = {
   light: {
@@ -216,23 +216,23 @@ export const themes: Record<NxTheme, ThemeTokens> = {
     '--nx-radius': '0.75rem',
   },
   custom: defaultTokens,
-}
+};
 
 export function applyTheme(element: HTMLElement, theme: NxTheme | CustomThemeInput): void {
-  let tokens: ThemeTokens
+  let tokens: ThemeTokens;
 
   if (typeof theme === 'object' && theme !== null) {
-    tokens = { ...defaultTokens, ...theme } as ThemeTokens
+    tokens = { ...defaultTokens, ...theme } as ThemeTokens;
   } else {
-    tokens = themes[theme as NxTheme] ?? themes.light
+    tokens = themes[theme as NxTheme] ?? themes.light;
   }
 
   for (const [prop, value] of Object.entries(tokens)) {
     if (value !== undefined) {
-      element.style.setProperty(prop, value)
+      element.style.setProperty(prop, value);
     }
   }
 
-  const themeName = typeof theme === 'object' ? (theme.name ?? 'custom') : theme
-  element.setAttribute('data-nx-theme', themeName)
+  const themeName = typeof theme === 'object' ? (theme.name ?? 'custom') : theme;
+  element.setAttribute('data-nx-theme', themeName);
 }

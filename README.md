@@ -23,6 +23,7 @@ A FullCalendar alternative built with modern web standards. Full-featured calend
 ## Features
 
 ### Core Features
+
 - **8 View Types**: Month, Week, Work Week, Day, List, Timeline, Resource Timeline, Year
 - **Drag & Drop**: Move and resize events seamlessly
 - **Business Hours**: Configurable work hours with visual indicators
@@ -30,15 +31,18 @@ A FullCalendar alternative built with modern web standards. Full-featured calend
 - **Recurring Events**: Support for recurring events (daily, weekly)
 
 ### Internationalization
+
 - **40+ Locales**: Full i18n support with `time-guard`
 - **RTL Support**: Right-to-left language compatibility
 - **Date Formats**: Locale-aware date and time formatting
 
 ### Timezone Support
+
 - **Global Events**: Handle events across multiple timezones
 - **Automatic Conversion**: Display times in user's local timezone
 
 ### Framework Support
+
 - **Web Components**: Native `<nx-calendar>` element
 - **React**: `@nexa-calendar/react` wrapper
 - **Vue**: `@nexa-calendar/vue` component
@@ -46,6 +50,7 @@ A FullCalendar alternative built with modern web standards. Full-featured calend
 - **Svelte**: `@nexa-calendar/svelte` component
 
 ### Customization
+
 - **7 Built-in Themes**: Light, Dark, Ocean, Rose, Slate, Forest, Amber
 - **Custom Theming**: Full CSS variable customization
 - **Event Styling**: Background events, custom colors, text colors
@@ -63,25 +68,21 @@ npm install @nexa-calendar/ui @nexa-calendar/core
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <script type="module">
-    import '@nexa-calendar/ui'
-  </script>
-</head>
-<body>
-  <nx-calendar
-    view="month"
-    locale="en"
-    theme="light"
-  ></nx-calendar>
+  <head>
+    <script type="module">
+      import '@nexa-calendar/ui';
+    </script>
+  </head>
+  <body>
+    <nx-calendar view="month" locale="en" theme="light"></nx-calendar>
 
-  <script>
-    const cal = document.querySelector('nx-calendar')
-    cal.events = [
-      { id: 1, title: 'Meeting', start: '2024-01-15T10:00:00', end: '2024-01-15T11:00:00' }
-    ]
-  </script>
-</body>
+    <script>
+      const cal = document.querySelector('nx-calendar');
+      cal.events = [
+        { id: 1, title: 'Meeting', start: '2024-01-15T10:00:00', end: '2024-01-15T11:00:00' },
+      ];
+    </script>
+  </body>
 </html>
 ```
 
@@ -92,7 +93,7 @@ npm install @nexa-calendar/react @nexa-calendar/core
 ```
 
 ```tsx
-import { NxCalendar } from '@nexa-calendar/react'
+import { NxCalendar } from '@nexa-calendar/react';
 
 function App() {
   return (
@@ -101,10 +102,10 @@ function App() {
       locale="en"
       theme="dark"
       events={[
-        { id: 1, title: 'Meeting', start: '2024-01-15T10:00:00', end: '2024-01-15T11:00:00' }
+        { id: 1, title: 'Meeting', start: '2024-01-15T10:00:00', end: '2024-01-15T11:00:00' },
       ]}
     />
-  )
+  );
 }
 ```
 
@@ -116,20 +117,14 @@ npm install @nexa-calendar/vue @nexa-calendar/core
 
 ```vue
 <template>
-  <NxCalendar
-    v-model:view="currentView"
-    locale="en"
-    :events="events"
-  />
+  <NxCalendar v-model:view="currentView" locale="en" :events="events" />
 </template>
 
 <script setup>
-import { NxCalendar } from '@nexa-calendar/vue'
+import { NxCalendar } from '@nexa-calendar/vue';
 
-const currentView = ref('month')
-const events = ref([
-  { id: 1, title: 'Meeting', start: '2024-01-15T10:00:00' }
-])
+const currentView = ref('month');
+const events = ref([{ id: 1, title: 'Meeting', start: '2024-01-15T10:00:00' }]);
 </script>
 ```
 
@@ -141,21 +136,17 @@ npm install @nexa-calendar/angular @nexa-calendar/core
 
 ```typescript
 // app.module.ts
-import { NgxNxCalendarModule } from '@nexa-calendar/angular'
+import { NgxNxCalendarModule } from '@nexa-calendar/angular';
 
 @NgModule({
-  imports: [NgxNxCalendarModule]
+  imports: [NgxNxCalendarModule],
 })
 export class AppModule {}
 ```
 
 ```html
 <!-- app.component.html -->
-<ngx-nx-calendar
-  [view]="'month'"
-  [locale]="'en'"
-  [events]="calendarEvents">
-</ngx-nx-calendar>
+<ngx-nx-calendar [view]="'month'" [locale]="'en'" [events]="calendarEvents"> </ngx-nx-calendar>
 ```
 
 ### Svelte
@@ -184,48 +175,48 @@ npm install @nexa-calendar/svelte @nexa-calendar/core
 
 ### Properties
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `view` | `ViewType` | `'month'` | Current view type |
-| `views` | `ViewType[]` | All views | Available views |
-| `locale` | `string` | `'en'` | Locale code |
-| `theme` | `string` | `'light'` | Theme name |
-| `events` | `ICalendarEvent[]` | `[]` | Calendar events |
-| `resources` | `IResource[]` | `[]` | Resources for timeline |
-| `editable` | `boolean` | `true` | Enable event editing |
-| `eventStartEditable` | `boolean` | `true` | Allow moving events |
-| `eventDurationEditable` | `boolean` | `true` | Allow resizing events |
-| `businessHours` | `BusinessHours` | `false` | Business hours config |
-| `weekends` | `boolean` | `true` | Show weekends |
-| `dayMaxEvents` | `number \| boolean` | `false` | Max events per day |
-| `slotDuration` | `number` | `60` | Time slot duration (minutes) |
-| `hourHeight` | `number` | `48` | Hour row height (px) |
-| `minTime` | `string` | `'00:00'` | Day start time |
-| `maxTime` | `string` | `'24:00'` | Day end time |
+| Property                | Type                | Default   | Description                  |
+| ----------------------- | ------------------- | --------- | ---------------------------- |
+| `view`                  | `ViewType`          | `'month'` | Current view type            |
+| `views`                 | `ViewType[]`        | All views | Available views              |
+| `locale`                | `string`            | `'en'`    | Locale code                  |
+| `theme`                 | `string`            | `'light'` | Theme name                   |
+| `events`                | `ICalendarEvent[]`  | `[]`      | Calendar events              |
+| `resources`             | `IResource[]`       | `[]`      | Resources for timeline       |
+| `editable`              | `boolean`           | `true`    | Enable event editing         |
+| `eventStartEditable`    | `boolean`           | `true`    | Allow moving events          |
+| `eventDurationEditable` | `boolean`           | `true`    | Allow resizing events        |
+| `businessHours`         | `BusinessHours`     | `false`   | Business hours config        |
+| `weekends`              | `boolean`           | `true`    | Show weekends                |
+| `dayMaxEvents`          | `number \| boolean` | `false`   | Max events per day           |
+| `slotDuration`          | `number`            | `60`      | Time slot duration (minutes) |
+| `hourHeight`            | `number`            | `48`      | Hour row height (px)         |
+| `minTime`               | `string`            | `'00:00'` | Day start time               |
+| `maxTime`               | `string`            | `'24:00'` | Day end time                 |
 
 ### Events
 
-| Event | Detail | Description |
-|-------|--------|-------------|
-| `dateClick` | `{ date, allDay }` | User clicked a date |
-| `eventClick` | `ICalendarEvent` | User clicked an event |
-| `eventDrop` | `{ eventId, newStart }` | Event was moved |
-| `eventResize` | `{ eventId, newStart, newEnd }` | Event was resized |
+| Event         | Detail                          | Description           |
+| ------------- | ------------------------------- | --------------------- |
+| `dateClick`   | `{ date, allDay }`              | User clicked a date   |
+| `eventClick`  | `ICalendarEvent`                | User clicked an event |
+| `eventDrop`   | `{ eventId, newStart }`         | Event was moved       |
+| `eventResize` | `{ eventId, newStart, newEnd }` | Event was resized     |
 
 ### View Types
 
 ```typescript
 type ViewType =
-  | 'month'        // 7xN grid
-  | 'workWeek'     // Mon-Fri time slots
-  | 'week'         // 7 days x 24h
-  | 'day'          // 1 day x 24h
-  | 'list'         // Chronological list
-  | 'timeline'     // Horizontal timeline
-  | 'timelineDay'  // Day timeline with resources
+  | 'month' // 7xN grid
+  | 'workWeek' // Mon-Fri time slots
+  | 'week' // 7 days x 24h
+  | 'day' // 1 day x 24h
+  | 'list' // Chronological list
+  | 'timeline' // Horizontal timeline
+  | 'timelineDay' // Day timeline with resources
   | 'timelineWeek' // Week timeline with resources
-  | 'timelineMonth'// Month timeline with resources
-  | 'year'         // 12 mini-months
+  | 'timelineMonth' // Month timeline with resources
+  | 'year'; // 12 mini-months
 ```
 
 ---
@@ -252,21 +243,21 @@ businessHours: [
 ### Custom Event Content
 
 ```typescript
-eventContent: (event) => ({
+eventContent: event => ({
   template: `<strong>${event.title}</strong><br><small>${event.start}</small>`,
-  className: 'custom-event-class'
-})
+  className: 'custom-event-class',
+});
 ```
 
 ### Themes
 
 ```typescript
 // Built-in themes
-theme: 'dark'   // Dark mode
-theme: 'ocean'  // Blue tones
-theme: 'rose'   // Pink/Red tones
-theme: 'forest' // Green tones
-theme: 'amber'  // Orange tones
+theme: 'dark'; // Dark mode
+theme: 'ocean'; // Blue tones
+theme: 'rose'; // Pink/Red tones
+theme: 'forest'; // Green tones
+theme: 'amber'; // Orange tones
 ```
 
 ---

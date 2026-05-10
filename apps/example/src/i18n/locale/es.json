@@ -80,13 +80,19 @@
       "end": "Fin"
     },
     "examples": {
-      "full": { "title": "Características Completas", "desc": "Eventos, horas laborales, DnD, i18n" },
+      "full": {
+        "title": "Características Completas",
+        "desc": "Eventos, horas laborales, DnD, i18n"
+      },
       "business": { "title": "Horas Laborales", "desc": "9AM–6PM Lun–Vie, vista semana laboral" },
       "minimal": { "title": "Mínimo / Solo Lectura", "desc": "Calendario simple, sin arrastrar" },
       "noweekends": { "title": "Sin Fines de Semana", "desc": "Solo Lun–Vie, ocultos no actuales" },
       "eventlimit": { "title": "Límite de Eventos (3)", "desc": "Máx 3 por día, popover 'más'" },
       "timeline": { "title": "Vista Timeline", "desc": "Barras horizontales entre días" },
-      "resource-timeline": { "title": "Resource Timeline", "desc": "Filas por recurso, columna fija" },
+      "resource-timeline": {
+        "title": "Resource Timeline",
+        "desc": "Filas por recurso, columna fija"
+      },
       "year": { "title": "Vista Anual", "desc": "12 mini-meses, puntos de evento" },
       "drag-drop": { "title": "Arrastrar y Soltar", "desc": "Mover y redimensionar eventos" },
       "background-events": { "title": "Eventos de Fondo", "desc": "Eventos como barras detrás" },

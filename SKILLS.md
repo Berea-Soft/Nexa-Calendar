@@ -12,55 +12,55 @@
 Essential API surface used across the project:
 
 ```typescript
-import { TimeGuard, timeGuard, TimeRange } from '@bereasoftware/time-guard'
+import { TimeGuard, timeGuard, TimeRange } from '@bereasoftware/time-guard';
 
 // Creation
-TimeGuard.now()                           // current moment
-TimeGuard.from('2024-03-15')              // parse ISO string
-timeGuard(new Date())                     // from native Date (only bridge point)
-TimeGuard.from({ year: 2024, month: 3, day: 15 })
+TimeGuard.now(); // current moment
+TimeGuard.from('2024-03-15'); // parse ISO string
+timeGuard(new Date()); // from native Date (only bridge point)
+TimeGuard.from({ year: 2024, month: 3, day: 15 });
 
 // Queries
-tg.isBefore(other)
-tg.isAfter(other)
-tg.isSame(other, 'day')
-tg.isBetween(start, end)
-tg.isToday()
-tg.daysInMonth()
+tg.isBefore(other);
+tg.isAfter(other);
+tg.isSame(other, 'day');
+tg.isBetween(start, end);
+tg.isToday();
+tg.daysInMonth();
 
 // Navigation
-tg.add({ months: 1 })
-tg.subtract({ days: 7 })
-tg.startOf('month')
-tg.endOf('month')
+tg.add({ months: 1 });
+tg.subtract({ days: 7 });
+tg.startOf('month');
+tg.endOf('month');
 
 // Diff
-tg.diff(other).as('days')                // raw number
-tg.diff(other, { mode: 'calendar' }).format('es')  // "2 meses y 5 días"
-tg.since(other).humanize()               // "2 months ago"
-tg.until(other).humanize({ fullBreakdown: true })
+tg.diff(other).as('days'); // raw number
+tg.diff(other, { mode: 'calendar' }).format('es'); // "2 meses y 5 días"
+tg.since(other).humanize(); // "2 months ago"
+tg.until(other).humanize({ fullBreakdown: true });
 
 // Range
-TimeGuard.range(start, end).humanize()
-TimeGuard.range(start, end).in('days')
-TimeGuard.between(a, b).total('hours')
+TimeGuard.range(start, end).humanize();
+TimeGuard.range(start, end).in('days');
+TimeGuard.between(a, b).total('hours');
 
 // Formatting
-tg.format('iso')      // 2024-03-15T00:00:00Z
-tg.format('date')     // 2024-03-15
-tg.format('datetime') // March 15, 2024 at 12:00 AM
+tg.format('iso'); // 2024-03-15T00:00:00Z
+tg.format('date'); // 2024-03-15
+tg.format('datetime'); // March 15, 2024 at 12:00 AM
 ```
 
 ## Lit 3 Web Components
 
 ```typescript
-import { LitElement, html } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { LitElement, html } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 
 @customElement('nx-month-view')
 export class NxMonthView extends LitElement {
-  @property({ type: Object }) store?: CalendarStore
-  @state() private _grid: DayInfo[] = []
+  @property({ type: Object }) store?: CalendarStore;
+  @state() private _grid: DayInfo[] = [];
 }
 ```
 

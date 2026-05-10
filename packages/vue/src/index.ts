@@ -13,16 +13,8 @@
  * No shadow DOM — all styling via CSS custom properties.
  */
 
-import '@nexa-calendar/ui'
-import {
-  defineComponent,
-  h,
-  ref,
-  onMounted,
-  onBeforeUnmount,
-  watch,
-  type PropType,
-} from 'vue'
+import '@nexa-calendar/ui';
+import { defineComponent, h, ref, onMounted, onBeforeUnmount, watch, type PropType } from 'vue';
 import type {
   EventInput,
   ViewType,
@@ -32,59 +24,79 @@ import type {
   BusinessHours,
   DropPayload,
   ResourceInput,
-} from '@nexa-calendar/core'
-import type { NxTheme } from '@nexa-calendar/ui'
+} from '@nexa-calendar/core';
+import type { NxTheme } from '@nexa-calendar/ui';
 
 export interface NxCalendarProps {
-  events?: EventInput[]
-  resources?: ResourceInput[]
-  eventSources?: EventSourceRawInput[]
-  view?: ViewType
-  views?: ViewType[]
-  locale?: string
-  theme?: NxTheme
-  businessHours?: BusinessHours | BusinessHours[] | boolean
-  minTime?: string
-  maxTime?: string
-  slotDuration?: number
-  slotLabelFormat?: string
-  scrollToTime?: string
-  dayMaxEvents?: number | boolean
-  fixedWeekCount?: boolean
-  weekends?: boolean
-  showNonCurrentDates?: boolean
-  firstDay?: number
-  editable?: boolean
-  eventStartEditable?: boolean
-  eventDurationEditable?: boolean
-  plugins?: ICalendarPlugin[]
-  headerToolbar?: boolean | Record<string, string>
-  height?: 'auto' | number | string
-  aspectRatio?: number
+  events?: EventInput[];
+  resources?: ResourceInput[];
+  eventSources?: EventSourceRawInput[];
+  view?: ViewType;
+  views?: ViewType[];
+  locale?: string;
+  theme?: NxTheme;
+  businessHours?: BusinessHours | BusinessHours[] | boolean;
+  minTime?: string;
+  maxTime?: string;
+  slotDuration?: number;
+  slotLabelFormat?: string;
+  scrollToTime?: string;
+  dayMaxEvents?: number | boolean;
+  fixedWeekCount?: boolean;
+  weekends?: boolean;
+  showNonCurrentDates?: boolean;
+  firstDay?: number;
+  editable?: boolean;
+  eventStartEditable?: boolean;
+  eventDurationEditable?: boolean;
+  plugins?: ICalendarPlugin[];
+  headerToolbar?: boolean | Record<string, string>;
+  height?: 'auto' | number | string;
+  aspectRatio?: number;
 }
 
 /** Thin type that extends the bare HTMLElement with NxCalendar's imperative API */
 export interface NxCalendarElement extends HTMLElement, NxCalendarProps {
-  addEvent(input: EventInput): ICalendarEvent | null
-  updateEvent(id: string | number, props: Partial<EventInput>): ICalendarEvent | undefined
-  removeEvent(id: string | number): boolean
-  getEvents(): ICalendarEvent[]
-  getView(): ViewType
-  changeView(view: ViewType): void
-  prev(): void
-  next(): void
-  today(): void
-  goToDate(date: string): void
-  requestUpdate(): void
+  addEvent(input: EventInput): ICalendarEvent | null;
+  updateEvent(id: string | number, props: Partial<EventInput>): ICalendarEvent | undefined;
+  removeEvent(id: string | number): boolean;
+  getEvents(): ICalendarEvent[];
+  getView(): ViewType;
+  changeView(view: ViewType): void;
+  prev(): void;
+  next(): void;
+  today(): void;
+  goToDate(date: string): void;
+  requestUpdate(): void;
 }
 
 const PROP_KEYS: Array<keyof NxCalendarProps> = [
-  'events', 'resources', 'eventSources', 'view', 'views', 'locale', 'theme',
-  'businessHours', 'minTime', 'maxTime', 'slotDuration', 'slotLabelFormat',
-  'scrollToTime', 'dayMaxEvents', 'fixedWeekCount', 'weekends',
-  'showNonCurrentDates', 'firstDay', 'editable', 'eventStartEditable',
-  'eventDurationEditable', 'plugins', 'headerToolbar', 'height', 'aspectRatio',
-]
+  'events',
+  'resources',
+  'eventSources',
+  'view',
+  'views',
+  'locale',
+  'theme',
+  'businessHours',
+  'minTime',
+  'maxTime',
+  'slotDuration',
+  'slotLabelFormat',
+  'scrollToTime',
+  'dayMaxEvents',
+  'fixedWeekCount',
+  'weekends',
+  'showNonCurrentDates',
+  'firstDay',
+  'editable',
+  'eventStartEditable',
+  'eventDurationEditable',
+  'plugins',
+  'headerToolbar',
+  'height',
+  'aspectRatio',
+];
 
 const EVENT_MAP: Record<string, string> = {
   onDateClick: 'dateClick',
@@ -93,7 +105,7 @@ const EVENT_MAP: Record<string, string> = {
   onEventResize: 'eventResize',
   onDrop: 'drop',
   onEditEvent: 'editEvent',
-}
+};
 
 export const NxCalendar = defineComponent({
   name: 'NxCalendar',
@@ -124,77 +136,74 @@ export const NxCalendar = defineComponent({
     height: [String, Number] as PropType<'auto' | number | string>,
     aspectRatio: Number,
   },
-  emits: [
-    'dateClick', 'eventClick', 'eventDrop', 'eventResize', 'drop', 'editEvent',
-  ],
+  emits: ['dateClick', 'eventClick', 'eventDrop', 'eventResize', 'drop', 'editEvent'],
   setup(props, { emit, expose }) {
-    const elRef = ref<NxCalendarElement | null>(null)
-    const listeners: Array<[string, EventListener]> = []
+    const elRef = ref<NxCalendarElement | null>(null);
+    const listeners: Array<[string, EventListener]> = [];
 
     /** Push a prop value onto the WC element imperatively */
     function applyProp(key: keyof NxCalendarProps, value: unknown): void {
-      const el = elRef.value
-      if (!el) return
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ;(el as any)[key] = value
+      const el = elRef.value;
+      if (!el) return; // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (el as any)[key] = value;
     }
 
     function applyAllProps(): void {
       for (const key of PROP_KEYS) {
-        const value = props[key as keyof typeof props]
-        if (value !== undefined) applyProp(key, value)
+        const value = props[key as keyof typeof props];
+        if (value !== undefined) applyProp(key, value);
       }
     }
 
     function attachListeners(): void {
-      const el = elRef.value
-      if (!el) return
+      const el = elRef.value;
+      if (!el) return;
       for (const [emitName, domEvent] of Object.entries(EVENT_MAP)) {
         const handler = ((e: CustomEvent) => {
           // strip the 'on' prefix to get the Vue emit name
-          const name = emitName.replace(/^on([A-Z])/, (_, c: string) => c.toLowerCase())
-          emit(name as Parameters<typeof emit>[0], e.detail)
-        }) as EventListener
-        el.addEventListener(domEvent, handler)
-        listeners.push([domEvent, handler])
+          const name = emitName.replace(/^on([A-Z])/, (_, c: string) => c.toLowerCase());
+          emit(name as Parameters<typeof emit>[0], e.detail);
+        }) as EventListener;
+        el.addEventListener(domEvent, handler);
+        listeners.push([domEvent, handler]);
       }
     }
 
     function detachListeners(): void {
-      const el = elRef.value
-      if (!el) return
+      const el = elRef.value;
+      if (!el) return;
       for (const [domEvent, handler] of listeners) {
-        el.removeEventListener(domEvent, handler)
+        el.removeEventListener(domEvent, handler);
       }
-      listeners.length = 0
+      listeners.length = 0;
     }
 
     onMounted(async () => {
-      await customElements.whenDefined('nx-calendar')
-      applyAllProps()
-      attachListeners()
-    })
+      await customElements.whenDefined('nx-calendar');
+      applyAllProps();
+      attachListeners();
+    });
 
     onBeforeUnmount(() => {
-      detachListeners()
-    })
+      detachListeners();
+    });
 
     // Watch every prop and push changes to the WC
     for (const key of PROP_KEYS) {
       watch(
         () => props[key as keyof typeof props],
-        (val) => {
-          if (val !== undefined) applyProp(key, val)
+        val => {
+          if (val !== undefined) applyProp(key, val);
         },
-        { deep: true },
-      )
+        { deep: true }
+      );
     }
 
     // Expose the underlying WC element for imperative API access
-    expose({ el: elRef })
+    expose({ el: elRef });
 
-    return () => h('nx-calendar', { ref: elRef })
+    return () => h('nx-calendar', { ref: elRef });
   },
-})
+});
 
-export type { NxTheme, EventInput, ViewType, ICalendarEvent, DropPayload, ResourceInput }
+export type { NxTheme, EventInput, ViewType, ICalendarEvent, DropPayload, ResourceInput };

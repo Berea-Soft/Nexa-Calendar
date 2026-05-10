@@ -1,23 +1,23 @@
-import { BusinessHours } from './constraint'
-import { Locale } from './locale'
+import { BusinessHours } from './constraint';
+import { Locale } from './locale';
 
 export interface ViewOptions {
-  businessHours: BusinessHours | BusinessHours[] | boolean
-  minTime: string
-  maxTime: string
-  slotDuration: number
-  slotLabelFormat: string
-  scrollToTime: string
-  fixedWeekCount: boolean
-  weekNumbers: boolean
-  showNonCurrentDates: boolean
-  weekends: boolean
-  dayMaxEvents: number | boolean
-  height: 'auto' | number | string
-  aspectRatio: number
-  handleWindowResize: boolean
-  locale: Locale
-  firstDay: number
+  businessHours: BusinessHours | BusinessHours[] | boolean;
+  minTime: string;
+  maxTime: string;
+  slotDuration: number;
+  slotLabelFormat: string;
+  scrollToTime: string;
+  fixedWeekCount: boolean;
+  weekNumbers: boolean;
+  showNonCurrentDates: boolean;
+  weekends: boolean;
+  dayMaxEvents: number | boolean;
+  height: 'auto' | number | string;
+  aspectRatio: number;
+  handleWindowResize: boolean;
+  locale: Locale;
+  firstDay: number;
 }
 
 export const DefaultViewOptions: ViewOptions = {
@@ -37,4 +37,4 @@ export const DefaultViewOptions: ViewOptions = {
   handleWindowResize: true,
   locale: null as unknown as Locale,
   firstDay: 0,
-}
+};

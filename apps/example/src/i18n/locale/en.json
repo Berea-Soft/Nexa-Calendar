@@ -86,7 +86,10 @@
       "noweekends": { "title": "No Weekends", "desc": "Mon–Fri only, non-current hidden" },
       "eventlimit": { "title": "Event Limit (3)", "desc": "Max 3 per day, 'more' popover" },
       "timeline": { "title": "Timeline View", "desc": "Horizontal event bars across days" },
-      "resource-timeline": { "title": "Resource Timeline", "desc": "Per-resource rows, frozen column" },
+      "resource-timeline": {
+        "title": "Resource Timeline",
+        "desc": "Per-resource rows, frozen column"
+      },
       "year": { "title": "Year View", "desc": "12 mini-months, event dots" },
       "drag-drop": { "title": "Drag & Drop", "desc": "Move and resize events" },
       "background-events": { "title": "Background Events", "desc": "Events shown as bars behind" },

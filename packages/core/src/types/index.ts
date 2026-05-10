@@ -1,9 +1,4 @@
-export type {
-  EventId,
-  EventDisplay,
-  ICalendarEvent,
-  EventInput,
-} from './event'
+export type { EventId, EventDisplay, ICalendarEvent, EventInput } from './event';
 
 export type {
   ViewType,
@@ -25,19 +20,11 @@ export type {
   IView,
   ViewTitleMap,
   ViewOptions,
-} from './view'
+} from './view';
 
-export type {
-  ResourceId,
-  IResource,
-  ResourceInput,
-} from './resource'
+export type { ResourceId, IResource, ResourceInput } from './resource';
 
-export type {
-  IEventSource,
-  EventSourceInput,
-  EventSourceRawInput,
-} from './source'
+export type { IEventSource, EventSourceInput, EventSourceRawInput } from './source';
 
 export type {
   CalendarState,
@@ -45,25 +32,15 @@ export type {
   Unsubscribe,
   CalendarEvent,
   CalendarEventPayloads,
-} from './store'
+} from './store';
 
-export type {
-  ICalendarPlugin,
-} from './plugin'
+export type { ICalendarPlugin } from './plugin';
 
-export type {
-  Locale,
-  LocaleCode,
-} from './locale'
+export type { Locale, LocaleCode } from './locale';
 
-export type {
-  INavigable,
-} from './navigable'
+export type { INavigable } from './navigable';
 
-export type {
-  BusinessHours,
-  EventConstraint,
-} from './constraint'
+export type { BusinessHours, EventConstraint } from './constraint';
 
 export type {
   DragStartPayload,
@@ -71,4 +48,4 @@ export type {
   ResizeStartPayload,
   ResizeEndPayload,
   DropPayload,
-} from './dnd'
+} from './dnd';

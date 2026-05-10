@@ -32,8 +32,12 @@
           <span class="text-xl">🔧</span> {{ t('support.contribute') }}
         </h2>
         <div class="grid grid-cols-2 gap-4">
-          <a href="https://github.com/nexa-calendar/nexa-calendar/fork" class="contribute-card">🍴 Fork</a>
-          <a href="https://github.com/nexa-calendar/nexa-calendar/issues" class="contribute-card">🐛 Issues</a>
+          <a href="https://github.com/nexa-calendar/nexa-calendar/fork" class="contribute-card"
+            >🍴 Fork</a
+          >
+          <a href="https://github.com/nexa-calendar/nexa-calendar/issues" class="contribute-card"
+            >🐛 Issues</a
+          >
         </div>
       </section>
     </div>
@@ -41,12 +45,33 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 </script>
 
 <style scoped>
-.support-page { min-height: 100vh; background: #020617; }
-.donate-card { background: rgba(15,23,42,0.5); border: 1px solid rgba(255,255,255,0.05); padding: 24px; border-radius: 16px; text-align: center; }
-.contribute-card { display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(15,23,42,0.5); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; color: white; font-weight: 500; text-decoration: none; }
+.support-page {
+  min-height: 100vh;
+  background: #020617;
+}
+.donate-card {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+}
+.contribute-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+}
 </style>

@@ -1,35 +1,35 @@
-import { ICalendarEvent } from './event'
-import { TimeGuard } from '@bereasoftware/time-guard'
+import { ICalendarEvent } from './event';
+import { TimeGuard } from '@bereasoftware/time-guard';
 
 export interface DragStartPayload {
-  event: ICalendarEvent
-  sourceEl: HTMLElement
-  startX: number
-  startY: number
+  event: ICalendarEvent;
+  sourceEl: HTMLElement;
+  startX: number;
+  startY: number;
 }
 
 export interface DragEndPayload {
-  event: ICalendarEvent
-  newStart: TimeGuard
-  newEnd?: TimeGuard
-  deltaDays: number
-  deltaMinutes: number
+  event: ICalendarEvent;
+  newStart: TimeGuard;
+  newEnd?: TimeGuard;
+  deltaDays: number;
+  deltaMinutes: number;
 }
 
 export interface ResizeStartPayload {
-  event: ICalendarEvent
-  sourceEl: HTMLElement
-  edge: 'start' | 'end'
+  event: ICalendarEvent;
+  sourceEl: HTMLElement;
+  edge: 'start' | 'end';
 }
 
 export interface ResizeEndPayload {
-  event: ICalendarEvent
-  newEnd: TimeGuard
-  deltaMinutes: number
+  event: ICalendarEvent;
+  newEnd: TimeGuard;
+  deltaMinutes: number;
 }
 
 export interface DropPayload {
-  date: TimeGuard
-  allDay: boolean
-  resourceId?: string
+  date: TimeGuard;
+  allDay: boolean;
+  resourceId?: string;
 }

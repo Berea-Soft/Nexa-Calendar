@@ -7,9 +7,11 @@
     </div>
 
     <div class="sidebar-body">
-
       <!-- Framework -->
-      <FrameworkPicker :model-value="framework" @update:model-value="$emit('update:framework', $event)" />
+      <FrameworkPicker
+        :model-value="framework"
+        @update:model-value="$emit('update:framework', $event)"
+      />
 
       <!-- Theme -->
       <ThemePicker :model-value="theme" @update:model-value="$emit('update:theme', $event)" />
@@ -19,336 +21,362 @@
 
       <!-- Examples (each collapsible) -->
       <div class="examples-list">
+        <div v-for="ex in EXAMPLES" :key="ex.key" class="example-item">
+          <!-- Example header (clickable) -->
           <div
-            v-for="ex in EXAMPLES"
-            :key="ex.key"
-            class="example-item"
+            class="example-header"
+            :class="{ active: example === ex.key }"
+            @click="toggleExample(ex.key)"
           >
-            <!-- Example header (clickable) -->
-            <div
-              class="example-header"
-              :class="{ active: example === ex.key }"
-              @click="toggleExample(ex.key)"
-            >
-              <span class="example-icon">{{ ex.icon }}</span>
-              <div class="example-info">
-                <div class="example-title">{{ t(`demo.examples.${ex.key}.title`) }}</div>
-                <div class="example-desc">{{ t(`demo.examples.${ex.key}.desc`) }}</div>
+            <span class="example-icon">{{ ex.icon }}</span>
+            <div class="example-info">
+              <div class="example-title">{{ t(`demo.examples.${ex.key}.title`) }}</div>
+              <div class="example-desc">{{ t(`demo.examples.${ex.key}.desc`) }}</div>
+            </div>
+            <span class="example-chevron">{{ expandedExample === ex.key ? '▼' : '▶' }}</span>
+          </div>
+
+          <!-- Example settings (collapsible) -->
+          <div v-if="expandedExample === ex.key" class="example-settings">
+            <!-- Views for this example -->
+            <div class="settings-group">
+              <label class="settings-label">{{ t('demo.sidebar.view') }}</label>
+              <div class="view-options">
+                <button
+                  v-for="v in EXAMPLE_VIEWS[ex.key]"
+                  :key="v"
+                  :class="['view-btn', { active: view === v && example === ex.key }]"
+                  @click="selectView(ex.key, v)"
+                >
+                  {{ getViewLabel(v) }}
+                </button>
               </div>
-              <span class="example-chevron">{{ expandedExample === ex.key ? '▼' : '▶' }}</span>
             </div>
 
-            <!-- Example settings (collapsible) -->
-            <div v-if="expandedExample === ex.key" class="example-settings">
-              <!-- Views for this example -->
+            <!-- Example-specific options -->
+            <template v-if="ex.key === 'timezones'">
               <div class="settings-group">
-                <label class="settings-label">{{ t('demo.sidebar.view') }}</label>
-                <div class="view-options">
+                <label class="settings-label">{{ t('demo.sidebar.timezone') }}</label>
+                <select
+                  class="settings-select"
+                  :value="timezone"
+                  @change="$emit('update:timezone', ($event.target as HTMLSelectElement).value)"
+                >
+                  <option v-for="tz in TIMEZONES" :key="tz.code" :value="tz.code">
+                    {{ tz.label }} ({{ tz.offset }})
+                  </option>
+                </select>
+              </div>
+            </template>
+
+            <template v-else-if="ex.key === 'locales'">
+              <div class="settings-group">
+                <label class="settings-label">{{ t('demo.sidebar.language') }}</label>
+                <select
+                  class="settings-select"
+                  :value="lang"
+                  @change="emit('update:lang', ($event.target as HTMLSelectElement).value)"
+                >
+                  <option v-for="lg in LANGS" :key="lg.code" :value="lg.code">
+                    {{ lg.flag }} {{ lg.label }}
+                  </option>
+                </select>
+              </div>
+            </template>
+
+            <template v-else-if="ex.key === 'theming'">
+              <div class="settings-group">
+                <label class="settings-label">{{ t('demo.sidebar.theme') }}</label>
+                <div class="theme-options">
                   <button
-                    v-for="v in EXAMPLE_VIEWS[ex.key]"
-                    :key="v"
-                    :class="['view-btn', { active: view === v && example === ex.key }]"
-                    @click="selectView(ex.key, v)"
+                    v-for="t in THEMES"
+                    :key="t.key"
+                    :class="['theme-btn', { active: theme === t.key }]"
+                    :style="{ backgroundColor: t.color }"
+                    @click="$emit('update:theme', t.key)"
+                    :title="t.label"
                   >
-                    {{ getViewLabel(v) }}
+                    <span v-if="theme === t.key" class="theme-check">✓</span>
+                  </button>
+                </div>
+              </div>
+            </template>
+
+            <template v-else-if="ex.key === 'eventlimit'">
+              <div class="settings-group">
+                <label class="settings-label"
+                  >{{ t('demo.sidebar.maxEvents') }}: {{ eventLimit }}</label
+                >
+                <input
+                  type="range"
+                  min="1"
+                  max="10"
+                  :value="eventLimit"
+                  @input="
+                    $emit('update:eventLimit', parseInt(($event.target as HTMLInputElement).value))
+                  "
+                  class="settings-range"
+                />
+              </div>
+            </template>
+
+            <template v-else-if="ex.key === 'business'">
+              <div class="settings-group">
+                <label class="settings-label">{{ t('demo.sidebar.businessHours') }}</label>
+                <div class="biz-hours">
+                  <div class="biz-row">
+                    <span>{{ t('demo.sidebar.start') }}:</span>
+                    <select
+                      :value="bizStart"
+                      @change="$emit('update:bizStart', ($event.target as HTMLSelectElement).value)"
+                    >
+                      <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
+                    </select>
+                  </div>
+                  <div class="biz-row">
+                    <span>{{ t('demo.sidebar.end') }}:</span>
+                    <select
+                      :value="bizEnd"
+                      @change="$emit('update:bizEnd', ($event.target as HTMLSelectElement).value)"
+                    >
+                      <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </template>
+
+            <template v-else-if="ex.key === 'full'">
+              <div class="settings-group">
+                <label class="settings-label">{{ t('demo.sidebar.options') }}</label>
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      :checked="showBizHours"
+                      @change="
+                        $emit('update:showBizHours', ($event.target as HTMLInputElement).checked)
+                      "
+                    />
+                    {{ t('demo.sidebar.businessHours') }}
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      :checked="showWeekends"
+                      @change="
+                        $emit('update:showWeekends', ($event.target as HTMLInputElement).checked)
+                      "
+                    />
+                    {{ t('demo.sidebar.showWeekends') }}
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      :checked="editable"
+                      @change="
+                        $emit('update:editable', ($event.target as HTMLInputElement).checked)
+                      "
+                    />
+                    {{ t('demo.sidebar.editable') }}
+                  </label>
+                </div>
+              </div>
+
+              <template v-if="showBizHours">
+                <div class="settings-group">
+                  <label class="settings-label">{{ t('demo.sidebar.bizConfig') }}</label>
+                  <select
+                    class="settings-select"
+                    :value="bizConfig"
+                    @change="$emit('update:bizConfig', ($event.target as HTMLSelectElement).value)"
+                  >
+                    <option v-for="(label, key) in BIZ_CONFIG_LABELS" :key="key" :value="key">
+                      {{ t(`demo.biz_configs.${key}`) }}
+                    </option>
+                  </select>
+                </div>
+              </template>
+
+              <template v-if="showBizHours && bizConfig === 'custom'">
+                <div class="settings-group">
+                  <label class="settings-label">{{ t('demo.sidebar.selectDays') }}</label>
+                  <div class="days-check">
+                    <label v-for="day in DAYS_OF_WEEK" :key="day.value" class="day-check">
+                      <input
+                        type="checkbox"
+                        :checked="bizDays.includes(day.value)"
+                        @change="toggleDay(day.value)"
+                      />
+                      {{ day.label }}
+                    </label>
+                  </div>
+                </div>
+                <div class="settings-group">
+                  <label class="settings-label">{{ t('demo.sidebar.customHours') }}</label>
+                  <div class="time-range">
+                    <select
+                      :value="bizStart"
+                      @change="$emit('update:bizStart', ($event.target as HTMLSelectElement).value)"
+                    >
+                      <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
+                    </select>
+                    <span>{{ t('demo.sidebar.to') }}</span>
+                    <select
+                      :value="bizEnd"
+                      @change="$emit('update:bizEnd', ($event.target as HTMLSelectElement).value)"
+                    >
+                      <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
+                    </select>
+                  </div>
+                </div>
+              </template>
+
+              <div class="settings-group">
+                <label class="settings-label">Time Range</label>
+                <div class="time-range">
+                  <select
+                    :value="minTime"
+                    @change="$emit('update:minTime', ($event.target as HTMLSelectElement).value)"
+                  >
+                    <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
+                  </select>
+                  <span>{{ t('demo.sidebar.to') }}</span>
+                  <select
+                    :value="maxTime"
+                    @change="$emit('update:maxTime', ($event.target as HTMLSelectElement).value)"
+                  >
+                    <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="settings-group">
+                <label class="settings-label"
+                  >{{ t('demo.sidebar.slotDuration') }}: {{ slotDuration }} min</label
+                >
+                <div class="slot-options">
+                  <button
+                    v-for="sd in SLOT_DURATIONS"
+                    :key="sd.value"
+                    :class="['slot-btn', { active: slotDuration === sd.value }]"
+                    @click="$emit('update:slotDuration', sd.value)"
+                  >
+                    {{ sd.label }}
                   </button>
                 </div>
               </div>
 
-              <!-- Example-specific options -->
-              <template v-if="ex.key === 'timezones'">
-                <div class="settings-group">
-                  <label class="settings-label">{{ t('demo.sidebar.timezone') }}</label>
-                  <select
-                    class="settings-select"
-                    :value="timezone"
-                    @change="$emit('update:timezone', ($event.target as HTMLSelectElement).value)"
-                  >
-                    <option v-for="tz in TIMEZONES" :key="tz.code" :value="tz.code">
-                      {{ tz.label }} ({{ tz.offset }})
-                    </option>
-                  </select>
-                </div>
-              </template>
+              <div class="settings-group">
+                <label class="settings-label">{{ t('demo.sidebar.hourHeight') }}</label>
+                <select
+                  class="settings-select"
+                  :value="hourHeight"
+                  @change="
+                    $emit('update:hourHeight', parseInt(($event.target as HTMLSelectElement).value))
+                  "
+                >
+                  <option v-for="hh in HOUR_HEIGHTS" :key="hh.value" :value="hh.value">
+                    {{ hh.label }}
+                  </option>
+                </select>
+              </div>
 
-              <template v-else-if="ex.key === 'locales'">
-                <div class="settings-group">
-                  <label class="settings-label">{{ t('demo.sidebar.language') }}</label>
-                  <select
-                    class="settings-select"
-                    :value="lang"
-                    @change="emit('update:lang', ($event.target as HTMLSelectElement).value)"
-                  >
-                    <option v-for="lg in LANGS" :key="lg.code" :value="lg.code">
-                      {{ lg.flag }} {{ lg.label }}
-                    </option>
-                  </select>
-                </div>
-              </template>
-
-              <template v-else-if="ex.key === 'theming'">
-                <div class="settings-group">
-                  <label class="settings-label">{{ t('demo.sidebar.theme') }}</label>
-                  <div class="theme-options">
-                    <button
-                      v-for="t in THEMES"
-                      :key="t.key"
-                      :class="['theme-btn', { active: theme === t.key }]"
-                      :style="{ backgroundColor: t.color }"
-                      @click="$emit('update:theme', t.key)"
-                      :title="t.label"
-                    >
-                      <span v-if="theme === t.key" class="theme-check">✓</span>
-                    </button>
-                  </div>
-                </div>
-              </template>
-
-              <template v-else-if="ex.key === 'eventlimit'">
-                <div class="settings-group">
-                  <label class="settings-label">{{ t('demo.sidebar.maxEvents') }}: {{ eventLimit }}</label>
-                  <input
-                    type="range"
-                    min="1"
-                    max="10"
-                    :value="eventLimit"
-                    @input="$emit('update:eventLimit', parseInt(($event.target as HTMLInputElement).value))"
-                    class="settings-range"
-                  />
-                </div>
-              </template>
-
-              <template v-else-if="ex.key === 'business'">
-                <div class="settings-group">
-                  <label class="settings-label">{{ t('demo.sidebar.businessHours') }}</label>
-                  <div class="biz-hours">
-                    <div class="biz-row">
-                      <span>{{ t('demo.sidebar.start') }}:</span>
-                      <select
-                        :value="bizStart"
-                        @change="$emit('update:bizStart', ($event.target as HTMLSelectElement).value)"
-                      >
-                        <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
-                      </select>
-                    </div>
-                    <div class="biz-row">
-                      <span>{{ t('demo.sidebar.end') }}:</span>
-                      <select
-                        :value="bizEnd"
-                        @change="$emit('update:bizEnd', ($event.target as HTMLSelectElement).value)"
-                      >
-                        <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </template>
-
-              <template v-else-if="ex.key === 'full'">
-                <div class="settings-group">
-                  <label class="settings-label">{{ t('demo.sidebar.options') }}</label>
-                  <div class="checkbox-group">
-                    <label class="checkbox-label">
-                      <input
-                        type="checkbox"
-                        :checked="showBizHours"
-                        @change="$emit('update:showBizHours', ($event.target as HTMLInputElement).checked)"
-                      />
-                      {{ t('demo.sidebar.businessHours') }}
-                    </label>
-                    <label class="checkbox-label">
-                      <input
-                        type="checkbox"
-                        :checked="showWeekends"
-                        @change="$emit('update:showWeekends', ($event.target as HTMLInputElement).checked)"
-                      />
-                      {{ t('demo.sidebar.showWeekends') }}
-                    </label>
-                    <label class="checkbox-label">
-                      <input
-                        type="checkbox"
-                        :checked="editable"
-                        @change="$emit('update:editable', ($event.target as HTMLInputElement).checked)"
-                      />
-                      {{ t('demo.sidebar.editable') }}
-                    </label>
-                  </div>
-                </div>
-
-                <template v-if="showBizHours">
-                  <div class="settings-group">
-                    <label class="settings-label">{{ t('demo.sidebar.bizConfig') }}</label>
-                    <select
-                      class="settings-select"
-                      :value="bizConfig"
-                      @change="$emit('update:bizConfig', ($event.target as HTMLSelectElement).value)"
-                    >
-                      <option v-for="(label, key) in BIZ_CONFIG_LABELS" :key="key" :value="key">
-                        {{ t(`demo.biz_configs.${key}`) }}
-                      </option>
-                    </select>
-                  </div>
-                </template>
-
-                <template v-if="showBizHours && bizConfig === 'custom'">
-                  <div class="settings-group">
-                    <label class="settings-label">{{ t('demo.sidebar.selectDays') }}</label>
-                    <div class="days-check">
-                      <label v-for="day in DAYS_OF_WEEK" :key="day.value" class="day-check">
-                        <input
-                          type="checkbox"
-                          :checked="bizDays.includes(day.value)"
-                          @change="toggleDay(day.value)"
-                        />
-                        {{ day.label }}
-                      </label>
-                    </div>
-                  </div>
-                  <div class="settings-group">
-                    <label class="settings-label">{{ t('demo.sidebar.customHours') }}</label>
-                    <div class="time-range">
-                      <select
-                        :value="bizStart"
-                        @change="$emit('update:bizStart', ($event.target as HTMLSelectElement).value)"
-                      >
-                        <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
-                      </select>
-                      <span>{{ t('demo.sidebar.to') }}</span>
-                      <select
-                        :value="bizEnd"
-                        @change="$emit('update:bizEnd', ($event.target as HTMLSelectElement).value)"
-                      >
-                        <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
-                      </select>
-                    </div>
-                  </div>
-                </template>
-
-                <div class="settings-group">
-                  <label class="settings-label">Time Range</label>
-                  <div class="time-range">
-                    <select :value="minTime" @change="$emit('update:minTime', ($event.target as HTMLSelectElement).value)">
-                      <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
-                    </select>
-                    <span>{{ t('demo.sidebar.to') }}</span>
-                    <select :value="maxTime" @change="$emit('update:maxTime', ($event.target as HTMLSelectElement).value)">
-                      <option v-for="h in hours" :key="h" :value="h">{{ h }}</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="settings-group">
-                  <label class="settings-label">{{ t('demo.sidebar.slotDuration') }}: {{ slotDuration }} min</label>
-                  <div class="slot-options">
-                    <button
-                      v-for="sd in SLOT_DURATIONS"
-                      :key="sd.value"
-                      :class="['slot-btn', { active: slotDuration === sd.value }]"
-                      @click="$emit('update:slotDuration', sd.value)"
-                    >
-                      {{ sd.label }}
-                    </button>
-                  </div>
-                </div>
-
-                <div class="settings-group">
-                  <label class="settings-label">{{ t('demo.sidebar.hourHeight') }}</label>
-                  <select
-                    class="settings-select"
-                    :value="hourHeight"
-                    @change="$emit('update:hourHeight', parseInt(($event.target as HTMLSelectElement).value))"
-                  >
-                    <option v-for="hh in HOUR_HEIGHTS" :key="hh.value" :value="hh.value">
-                      {{ hh.label }}
-                    </option>
-                  </select>
-                </div>
-
-                <div class="settings-group">
-                  <label class="settings-label">{{ t('demo.sidebar.timeFormat') }}</label>
-                  <select
-                    class="settings-select"
-                    :value="slotLabelFormat"
-                    @change="$emit('update:slotLabelFormat', ($event.target as HTMLSelectElement).value)"
-                  >
-                    <option v-for="fmt in TIME_FORMATS" :key="fmt.value" :value="fmt.value">
-                      {{ fmt.label }}
-                    </option>
-                  </select>
-                </div>
-              </template>
-            </div>
+              <div class="settings-group">
+                <label class="settings-label">{{ t('demo.sidebar.timeFormat') }}</label>
+                <select
+                  class="settings-select"
+                  :value="slotLabelFormat"
+                  @change="
+                    $emit('update:slotLabelFormat', ($event.target as HTMLSelectElement).value)
+                  "
+                >
+                  <option v-for="fmt in TIME_FORMATS" :key="fmt.value" :value="fmt.value">
+                    {{ fmt.label }}
+                  </option>
+                </select>
+              </div>
+            </template>
           </div>
         </div>
+      </div>
 
       <!-- Add event -->
       <button class="add-btn" @click="$emit('addEvent')">+ {{ t('demo.sidebar.addEvent') }}</button>
-
     </div>
 
-    <div class="sidebar-footer">
-      Powered by TimeGuard · Lit 3 · TypeScript
-    </div>
+    <div class="sidebar-footer">Powered by TimeGuard · Lit 3 · TypeScript</div>
   </aside>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { EXAMPLES, EXAMPLE_VIEWS, TIMEZONES, LANGS, THEMES, VIEWS, SLOT_DURATIONS, HOUR_HEIGHTS, TIME_FORMATS, DAYS_OF_WEEK } from '../data'
-import type { NxTheme, ViewType, ExampleKey, FrameworkKey } from '../data'
-import FrameworkPicker from './FrameworkPicker.vue'
-import ThemePicker from './ThemePicker.vue'
-import LangPicker from './LangPicker.vue'
+import { ref, computed, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import {
+  EXAMPLES,
+  EXAMPLE_VIEWS,
+  TIMEZONES,
+  LANGS,
+  THEMES,
+  VIEWS,
+  SLOT_DURATIONS,
+  HOUR_HEIGHTS,
+  TIME_FORMATS,
+  DAYS_OF_WEEK,
+} from '../data';
+import type { NxTheme, ViewType, ExampleKey, FrameworkKey } from '../data';
+import FrameworkPicker from './FrameworkPicker.vue';
+import ThemePicker from './ThemePicker.vue';
+import LangPicker from './LangPicker.vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const props = defineProps<{
-  theme: NxTheme
-  lang: string
-  view: ViewType
-  example: ExampleKey
-  framework: FrameworkKey
-  timezone: string
-  eventLimit: number
-  bizStart: string
-  bizEnd: string
-  bizDays: number[]
-  bizConfig: string
-  showBizHours: boolean
-  showWeekends: boolean
-  editable: boolean
-  slotDuration: number
-  hourHeight: number
-  slotLabelFormat: string
-  minTime: string
-  maxTime: string
-}>()
+  theme: NxTheme;
+  lang: string;
+  view: ViewType;
+  example: ExampleKey;
+  framework: FrameworkKey;
+  timezone: string;
+  eventLimit: number;
+  bizStart: string;
+  bizEnd: string;
+  bizDays: number[];
+  bizConfig: string;
+  showBizHours: boolean;
+  showWeekends: boolean;
+  editable: boolean;
+  slotDuration: number;
+  hourHeight: number;
+  slotLabelFormat: string;
+  minTime: string;
+  maxTime: string;
+}>();
 
 const emit = defineEmits<{
-  'update:theme': [v: NxTheme]
-  'update:lang': [v: string]
-  'update:view': [v: ViewType]
-  'update:example': [v: ExampleKey]
-  'update:framework': [v: FrameworkKey]
-  'update:timezone': [v: string]
-  'update:eventLimit': [v: number]
-  'update:bizStart': [v: string]
-  'update:bizEnd': [v: string]
-  'update:bizDays': [v: number[]]
-  'update:bizConfig': [v: string]
-  'update:showBizHours': [v: boolean]
-  'update:showWeekends': [v: boolean]
-  'update:editable': [v: boolean]
-  'update:slotDuration': [v: number]
-  'update:hourHeight': [v: number]
-  'update:slotLabelFormat': [v: string]
-  'update:minTime': [v: string]
-  'update:maxTime': [v: string]
-  'addEvent': []
-}>()
+  'update:theme': [v: NxTheme];
+  'update:lang': [v: string];
+  'update:view': [v: ViewType];
+  'update:example': [v: ExampleKey];
+  'update:framework': [v: FrameworkKey];
+  'update:timezone': [v: string];
+  'update:eventLimit': [v: number];
+  'update:bizStart': [v: string];
+  'update:bizEnd': [v: string];
+  'update:bizDays': [v: number[]];
+  'update:bizConfig': [v: string];
+  'update:showBizHours': [v: boolean];
+  'update:showWeekends': [v: boolean];
+  'update:editable': [v: boolean];
+  'update:slotDuration': [v: number];
+  'update:hourHeight': [v: number];
+  'update:slotLabelFormat': [v: string];
+  'update:minTime': [v: string];
+  'update:maxTime': [v: string];
+  addEvent: [];
+}>();
 
-const expandedExample = ref<ExampleKey | null>(props.example)
+const expandedExample = ref<ExampleKey | null>(props.example);
 
 const BIZ_CONFIG_LABELS = {
   default: '',
@@ -358,54 +386,58 @@ const BIZ_CONFIG_LABELS = {
   nightShift: '',
   split: '',
   weekend: '',
-  custom: ''
-}
+  custom: '',
+};
 
 function toggleExample(key: ExampleKey) {
   if (props.example !== key) {
-    emit('update:example', key)
-    emit('update:view', EXAMPLE_VIEWS[key][0] as ViewType)
-    expandedExample.value = key
-    return
+    emit('update:example', key);
+    emit('update:view', EXAMPLE_VIEWS[key][0] as ViewType);
+    expandedExample.value = key;
+    return;
   }
 
-  expandedExample.value = expandedExample.value === key ? null : key
+  expandedExample.value = expandedExample.value === key ? null : key;
 }
 
 function selectView(key: ExampleKey, nextView: string) {
-  emit('update:example', key)
-  emit('update:view', nextView as ViewType)
-  expandedExample.value = key
+  emit('update:example', key);
+  emit('update:view', nextView as ViewType);
+  expandedExample.value = key;
 }
 
 const hours = computed(() => {
-  const arr = []
+  const arr = [];
   for (let h = 0; h < 24; h++) {
-    arr.push(`${h.toString().padStart(2, '0')}:00`)
+    arr.push(`${h.toString().padStart(2, '0')}:00`);
   }
-  return arr
-})
+  return arr;
+});
 
 function toggleDay(day: number) {
-  const current = [...props.bizDays]
-  const idx = current.indexOf(day)
+  const current = [...props.bizDays];
+  const idx = current.indexOf(day);
   if (idx >= 0) {
-    current.splice(idx, 1)
+    current.splice(idx, 1);
   } else {
-    current.push(day)
-    current.sort()
+    current.push(day);
+    current.sort();
   }
-  emit('update:bizDays', current)
+  emit('update:bizDays', current);
 }
 
 function getViewLabel(v: string): string {
-  const view = VIEWS.find(x => x.key === v)
-  return view?.label || v
+  const view = VIEWS.find(x => x.key === v);
+  return view?.label || v;
 }
 
-watch(() => props.example, (nextExample) => {
-  expandedExample.value = nextExample
-}, { immediate: true })
+watch(
+  () => props.example,
+  nextExample => {
+    expandedExample.value = nextExample;
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped>
@@ -683,7 +715,7 @@ watch(() => props.example, (nextExample) => {
   color: #fff;
   font-size: 0.7rem;
   font-weight: bold;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .settings-range {
@@ -761,7 +793,9 @@ watch(() => props.example, (nextExample) => {
   transition: background 0.15s;
 }
 
-.add-btn:hover { background: #15803d; }
+.add-btn:hover {
+  background: #15803d;
+}
 
 .sidebar-footer {
   padding: 12px 16px;

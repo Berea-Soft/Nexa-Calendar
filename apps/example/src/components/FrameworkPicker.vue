@@ -15,11 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import { FRAMEWORKS } from '../data'
-import type { FrameworkKey } from '../data'
+import { FRAMEWORKS } from '../data';
+import type { FrameworkKey } from '../data';
 
-defineProps<{ modelValue: FrameworkKey }>()
-defineEmits<{ 'update:modelValue': [value: FrameworkKey] }>()
+defineProps<{ modelValue: FrameworkKey }>();
+defineEmits<{ 'update:modelValue': [value: FrameworkKey] }>();
 </script>
 
 <style scoped>

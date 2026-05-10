@@ -1,11 +1,24 @@
 <template>
   <svg :class="className" fill="none" viewBox="0 0 223 236" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#a-angular)">
-      <path d="m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z" fill="url(#b-angular)"></path>
-      <path d="m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z" fill="url(#c-angular)"></path>
+      <path
+        d="m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
+        fill="url(#b-angular)"
+      ></path>
+      <path
+        d="m222.077 39.192-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
+        fill="url(#c-angular)"
+      ></path>
     </g>
     <defs>
-      <linearGradient gradientUnits="userSpaceOnUse" id="b-angular" x1="49.009" x2="225.829" y1="213.75" y2="129.722">
+      <linearGradient
+        gradientUnits="userSpaceOnUse"
+        id="b-angular"
+        x1="49.009"
+        x2="225.829"
+        y1="213.75"
+        y2="129.722"
+      >
         <stop stop-color="#E40035"></stop>
         <stop offset=".24" stop-color="#F60A48"></stop>
         <stop offset=".352" stop-color="#F20755"></stop>
@@ -13,7 +26,14 @@
         <stop offset=".745" stop-color="#9717E7"></stop>
         <stop offset="1" stop-color="#6C00F5"></stop>
       </linearGradient>
-      <linearGradient gradientUnits="userSpaceOnUse" id="c-angular" x1="41.025" x2="156.741" y1="28.344" y2="160.344">
+      <linearGradient
+        gradientUnits="userSpaceOnUse"
+        id="c-angular"
+        x1="41.025"
+        x2="156.741"
+        y1="28.344"
+        y2="160.344"
+      >
         <stop stop-color="#FF31D9"></stop>
         <stop offset="1" stop-color="#FF5BE1" stop-opacity="0"></stop>
       </linearGradient>
@@ -26,6 +46,6 @@
 
 <script setup lang="ts">
 defineProps<{
-  className?: string
-}>()
+  className?: string;
+}>();
 </script>

@@ -12,7 +12,7 @@
  * Events are forwarded from the WC's CustomEvents to Svelte dispatched events.
  */
 
-import '@nexa-calendar/ui'
+import '@nexa-calendar/ui';
 
 export type {
   EventInput,
@@ -23,5 +23,5 @@ export type {
   BusinessHours,
   DropPayload,
   ResourceInput,
-} from '@nexa-calendar/core'
-export type { NxTheme } from '@nexa-calendar/ui'
+} from '@nexa-calendar/core';
+export type { NxTheme } from '@nexa-calendar/ui';

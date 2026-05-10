@@ -17,16 +17,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { THEMES } from '../data'
-import type { NxTheme } from '../data'
+import { computed } from 'vue';
+import { THEMES } from '../data';
+import type { NxTheme } from '../data';
 
-const props = defineProps<{ modelValue: NxTheme }>()
-defineEmits<{ (e: 'update:modelValue', v: NxTheme): void }>()
+const props = defineProps<{ modelValue: NxTheme }>();
+defineEmits<{ (e: 'update:modelValue', v: NxTheme): void }>();
 
-const currentLabel = computed(() =>
-  THEMES.find(t => t.key === props.modelValue)?.label ?? ''
-)
+const currentLabel = computed(() => THEMES.find(t => t.key === props.modelValue)?.label ?? '');
 </script>
 
 <style scoped>
@@ -42,11 +40,18 @@ const currentLabel = computed(() =>
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: transform 0.15s, border-color 0.15s;
+  transition:
+    transform 0.15s,
+    border-color 0.15s;
   flex-shrink: 0;
 }
-.swatch:hover { transform: scale(1.15); }
-.swatch.active { border-color: #fff; transform: scale(1.1); }
+.swatch:hover {
+  transform: scale(1.15);
+}
+.swatch.active {
+  border-color: #fff;
+  transform: scale(1.1);
+}
 .theme-label {
   font-size: 0.68rem;
   color: #475569;

@@ -5,13 +5,15 @@
       <div class="hero-bg"></div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <div class="text-center">
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8">
+          <div
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8"
+          >
             <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
             <span class="text-sm text-slate-400">v1.0.0 · 6 Frameworks · 40+ Locales</span>
           </div>
 
           <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
-            Build Beautiful<br>
+            Build Beautiful<br />
             <span class="code-gradient">Calendars Faster</span>
           </h1>
 
@@ -20,10 +22,16 @@
           </p>
 
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <router-link to="/demo" class="px-8 py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 text-white rounded-xl font-semibold transition shadow-lg shadow-indigo-500/25">
+            <router-link
+              to="/demo"
+              class="px-8 py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 text-white rounded-xl font-semibold transition shadow-lg shadow-indigo-500/25"
+            >
               {{ t('home.cta') }} →
             </router-link>
-            <a href="https://github.com/nexa-calendar/nexa-calendar" class="px-8 py-4 bg-white/5 text-white rounded-xl font-semibold transition border border-white/10 flex items-center gap-2">
+            <a
+              href="https://github.com/nexa-calendar/nexa-calendar"
+              class="px-8 py-4 bg-white/5 text-white rounded-xl font-semibold transition border border-white/10 flex items-center gap-2"
+            >
               <IconGithub className="w-5 h-5" />
               {{ t('home.github') }}
             </a>
@@ -142,49 +150,111 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { IconGithub, IconAngular, IconVue, IconReact, IconSvelte, IconJS } from '../components/common/icons'
-const { t } = useI18n()
+import { useI18n } from 'vue-i18n';
+import {
+  IconGithub,
+  IconAngular,
+  IconVue,
+  IconReact,
+  IconSvelte,
+  IconJS,
+} from '../components/common/icons';
+const { t } = useI18n();
 </script>
 
 <style scoped>
-.hero { position: relative; }
+.hero {
+  position: relative;
+}
 .hero-bg {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
-              radial-gradient(ellipse 60% 40% at 80% 60%, rgba(139, 92, 246, 0.1), transparent);
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(139, 92, 246, 0.1), transparent);
   z-index: -1;
 }
 .code-gradient {
   background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .feature-card {
-  background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 16px; padding: 24px; transition: all 0.3s;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s;
 }
-.feature-card:hover { transform: translateY(-4px); border-color: rgba(99, 102, 241, 0.3); }
-.feature-card h3 { color: white; font-weight: 600; margin-bottom: 8px; }
-.feature-card p { color: #94a3b8; font-size: 14px; }
-.feature-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; }
-.feature-icon.indi { background: rgba(99, 102, 241, 0.2); }
-.feature-icon.purp { background: rgba(139, 92, 246, 0.2); }
-.feature-icon.green { background: rgba(16, 185, 129, 0.2); }
-.feature-icon.yell { background: rgba(234, 179, 8, 0.2); }
-.feature-icon.pink { background: rgba(236, 72, 153, 0.2); }
-.feature-icon.cyan { background: rgba(6, 182, 212, 0.2); }
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+.feature-card h3 {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.feature-card p {
+  color: #94a3b8;
+  font-size: 14px;
+}
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+.feature-icon.indi {
+  background: rgba(99, 102, 241, 0.2);
+}
+.feature-icon.purp {
+  background: rgba(139, 92, 246, 0.2);
+}
+.feature-icon.green {
+  background: rgba(16, 185, 129, 0.2);
+}
+.feature-icon.yell {
+  background: rgba(234, 179, 8, 0.2);
+}
+.feature-icon.pink {
+  background: rgba(236, 72, 153, 0.2);
+}
+.feature-icon.cyan {
+  background: rgba(6, 182, 212, 0.2);
+}
 .framework-badge {
-  display: flex; align-items: center; gap: 8px;
-  background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.05);
-  padding: 12px 20px; border-radius: 12px; color: white; font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 12px 20px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 500;
 }
 .install-box {
-  background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px; padding: 24px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
 }
-.install-box h3 { color: white; font-weight: 600; margin-bottom: 16px; }
+.install-box h3 {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
 .install-box code {
-  display: block; background: #020617; color: #34d399; padding: 16px;
-  border-radius: 8px; font-size: 14px;
+  display: block;
+  background: #020617;
+  color: #34d399;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 14px;
 }
 </style>

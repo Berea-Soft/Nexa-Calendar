@@ -8,7 +8,10 @@
       <span class="text-base">{{ currentLang?.flag }}</span>
       <span class="hidden sm:inline">{{ currentLang?.label }}</span>
       <span class="sm:hidden">{{ currentLang?.code.toUpperCase() }}</span>
-      <IconChevronDown class-name="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': isOpen }" />
+      <IconChevronDown
+        class-name="w-4 h-4 transition-transform duration-200"
+        :class="{ 'rotate-180': isOpen }"
+      />
     </button>
 
     <transition
@@ -31,7 +34,7 @@
             :class="[
               modelValue === lang.code
                 ? 'bg-indigo-500/10 text-indigo-400 font-semibold'
-                : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                : 'text-slate-300 hover:bg-slate-800 hover:text-white',
             ]"
             @click="selectLang(lang.code)"
           >
@@ -39,7 +42,11 @@
             <span>{{ lang.label }}</span>
             <span v-if="modelValue === lang.code" class="ml-auto text-indigo-400">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
               </svg>
             </span>
           </button>
@@ -50,45 +57,45 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { IconChevronDown } from './common/icons'
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { IconChevronDown } from './common/icons';
 
 const props = defineProps<{
-  modelValue: string
-}>()
+  modelValue: string;
+}>();
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
-}>()
+  (e: 'update:modelValue', value: string): void;
+}>();
 
-const isOpen = ref(false)
-const dropdownRef = ref<HTMLElement | null>(null)
+const isOpen = ref(false);
+const dropdownRef = ref<HTMLElement | null>(null);
 
 const langs = [
   { code: 'en', label: 'English', flag: '🇺🇸' },
   { code: 'es', label: 'Español', flag: '🇪🇸' },
   { code: 'fr', label: 'Français', flag: '🇫🇷' },
-  { code: 'zh', label: '中文', flag: '🇨🇳' }
-]
+  { code: 'zh', label: '中文', flag: '🇨🇳' },
+];
 
-const currentLang = computed(() => langs.find(l => l.code === props.modelValue))
+const currentLang = computed(() => langs.find(l => l.code === props.modelValue));
 
 const selectLang = (code: string) => {
-  emit('update:modelValue', code)
-  isOpen.value = false
-}
+  emit('update:modelValue', code);
+  isOpen.value = false;
+};
 
 const handleClickOutside = (event: MouseEvent) => {
   if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
-    isOpen.value = false
+    isOpen.value = false;
   }
-}
+};
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-})
+  document.addEventListener('click', handleClickOutside);
+});
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
+  document.removeEventListener('click', handleClickOutside);
+});
 </script>

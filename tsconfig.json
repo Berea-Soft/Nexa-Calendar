@@ -27,6 +27,14 @@
       "@nexa-calendar/react": ["./packages/react/src/index.ts"]
     }
   },
-  "include": ["packages/core/**/*", "packages/ui/**/*", "packages/vue/**/*", "packages/angular/**/*", "packages/svelte/**/*", "packages/react/**/*", "apps/**/*"],
+  "include": [
+    "packages/core/**/*",
+    "packages/ui/**/*",
+    "packages/vue/**/*",
+    "packages/angular/**/*",
+    "packages/svelte/**/*",
+    "packages/react/**/*",
+    "apps/**/*"
+  ],
   "exclude": ["**/dist", "**/node_modules"]
 }

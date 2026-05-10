@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, nextTick, computed } from "vue";
-import "@nexa-calendar/ui";
+import { ref, watch, onMounted, nextTick, computed } from 'vue';
+import '@nexa-calendar/ui';
 import {
   BASE_EVENTS,
   DRAG_DROP_EVENTS,
@@ -21,8 +21,8 @@ import {
   EXAMPLE_VIEWS,
   TIMEZONES,
   TIMEZONE_EVENTS_UTC,
-} from "../data";
-import type { NxTheme, ViewType, ExampleKey, FrameworkKey } from "../data";
+} from '../data';
+import type { NxTheme, ViewType, ExampleKey, FrameworkKey } from '../data';
 
 const props = defineProps<{
   theme: NxTheme;
@@ -46,9 +46,14 @@ const props = defineProps<{
   maxTime?: string;
 }>();
 
-console.log('CalendarDemo props bizHours:', props.bizHours, 'bizHours type:', typeof props.bizHours)
+console.log(
+  'CalendarDemo props bizHours:',
+  props.bizHours,
+  'bizHours type:',
+  typeof props.bizHours
+);
 
-const activeTab = ref<"view" | "code">("view");
+const activeTab = ref<'view' | 'code'>('view');
 
 interface NxCalendarEl extends HTMLElement {
   theme: NxTheme;
@@ -86,54 +91,41 @@ function getExampleViews(example: ExampleKey): ViewType[] {
 
 function getValidView(example: ExampleKey, candidate?: ViewType): ViewType {
   const supportedViews = getExampleViews(example);
-  return candidate && supportedViews.includes(candidate)
-    ? candidate
-    : supportedViews[0];
+  return candidate && supportedViews.includes(candidate) ? candidate : supportedViews[0];
 }
 
 const currentView = computed(() => getValidView(props.example, props.view));
 const codeSnippet = computed(() =>
-  generateCode(
-    props.example,
-    currentView.value,
-    props.lang,
-    props.theme,
-    props.framework,
-  ),
+  generateCode(props.example, currentView.value, props.lang, props.theme, props.framework)
 );
 
 function parseOffsetMinutes(offset: string): number {
-  const sign = offset.startsWith("-") ? -1 : 1;
-  const [hours, minutes] = offset.slice(1).split(":").map(Number);
+  const sign = offset.startsWith('-') ? -1 : 1;
+  const [hours, minutes] = offset.slice(1).split(':').map(Number);
   return sign * (hours * 60 + minutes);
 }
 
 function formatShiftedIso(date: Date): string {
   const year = date.getUTCFullYear();
-  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
-  const day = String(date.getUTCDate()).padStart(2, "0");
-  const hours = String(date.getUTCHours()).padStart(2, "0");
-  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, '0');
+  const hours = String(date.getUTCHours()).padStart(2, '0');
+  const minutes = String(date.getUTCMinutes()).padStart(2, '0');
   return `${year}-${month}-${day}T${hours}:${minutes}:00`;
 }
 
 function shiftIsoToOffset(iso: string, offset: string): string {
-  const shifted = new Date(
-    new Date(iso).getTime() + parseOffsetMinutes(offset) * 60_000,
-  );
+  const shifted = new Date(new Date(iso).getTime() + parseOffsetMinutes(offset) * 60_000);
   return formatShiftedIso(shifted);
 }
 
 function buildTimezoneEvents(timezoneCode?: string) {
-  const timezone =
-    TIMEZONES.find((item) => item.code === timezoneCode) ?? TIMEZONES[0];
+  const timezone = TIMEZONES.find(item => item.code === timezoneCode) ?? TIMEZONES[0];
 
-  return TIMEZONE_EVENTS_UTC.map((event) => ({
+  return TIMEZONE_EVENTS_UTC.map(event => ({
     ...event,
     start: shiftIsoToOffset(String(event.start), timezone.offset),
-    ...(event.end
-      ? { end: shiftIsoToOffset(String(event.end), timezone.offset) }
-      : {}),
+    ...(event.end ? { end: shiftIsoToOffset(String(event.end), timezone.offset) } : {}),
   }));
 }
 
@@ -154,9 +146,9 @@ function resetDefaults(c: NxCalendarEl) {
   c.resources = [];
   c.slotDuration = props.slotDuration ?? 60;
   c.hourHeight = props.hourHeight ?? 48;
-  c.slotLabelFormat = props.slotLabelFormat ?? "h:mm a";
-  c.minTime = props.minTime ?? "00:00";
-  c.maxTime = props.maxTime ?? "24:00";
+  c.slotLabelFormat = props.slotLabelFormat ?? 'h:mm a';
+  c.minTime = props.minTime ?? '00:00';
+  c.maxTime = props.maxTime ?? '24:00';
 }
 
 function applyExample(key: ExampleKey, c: NxCalendarEl) {
@@ -165,12 +157,11 @@ function applyExample(key: ExampleKey, c: NxCalendarEl) {
   c.view = getValidView(key, props.view);
 
   const useBizHours = props.bizHours !== undefined ? props.bizHours : BIZ_HOURS;
-  const useWeekends =
-    props.showWeekends !== undefined ? props.showWeekends : true;
+  const useWeekends = props.showWeekends !== undefined ? props.showWeekends : true;
   const useEditable = props.editable !== undefined ? props.editable : true;
 
   switch (key) {
-    case "full":
+    case 'full':
       c.events = BASE_EVENTS;
       c.dayMaxEvents = 5;
       c.businessHours = useBizHours;
@@ -180,70 +171,70 @@ function applyExample(key: ExampleKey, c: NxCalendarEl) {
       c.eventDurationEditable = useEditable;
       break;
 
-    case "business":
+    case 'business':
       c.events = BASE_EVENTS.filter((e: any) => e.id !== 4);
       c.businessHours = useBizHours;
       c.weekends = false;
       c.showNonCurrentDates = false;
       break;
 
-    case "minimal":
+    case 'minimal':
       c.events = BASE_EVENTS.slice(0, 4);
       c.editable = false;
       c.eventStartEditable = false;
       c.eventDurationEditable = false;
       break;
 
-    case "noweekends":
+    case 'noweekends':
       c.events = BASE_EVENTS;
       c.weekends = false;
       c.showNonCurrentDates = false;
       break;
 
-    case "eventlimit":
+    case 'eventlimit':
       c.events = BASE_EVENTS;
       c.dayMaxEvents = props.eventLimit || 3;
       c.businessHours = useBizHours;
       break;
 
-    case "timeline":
+    case 'timeline':
       c.events = TIMELINE_EVENTS;
       break;
 
-    case "resource-timeline":
+    case 'resource-timeline':
       c.resources = RESOURCES;
       c.events = RESOURCE_EVENTS;
       break;
 
-    case "year":
+    case 'year':
       c.events = BASE_EVENTS;
       break;
 
-    case "drag-drop":
+    case 'drag-drop':
       c.events = DRAG_DROP_EVENTS;
       c.editable = true;
       c.eventStartEditable = true;
       break;
 
-    case "background-events":
+    case 'background-events':
       c.events = BACKGROUND_EVENTS;
       break;
 
-    case "selectable":
+    case 'selectable':
       c.events = SELECTABLE_EVENTS;
       break;
 
-    case "locales":
+    case 'locales':
       c.events = BASE_EVENTS;
       c.locale = props.lang;
       break;
 
-    case "theming":
+    case 'theming':
       c.events = BASE_EVENTS;
       c.theme = props.theme;
       break;
 
-    case "timezones":
+    case 'timezones':
       c.events = buildTimezoneEvents(props.timezone);
       break;
 
@@ -254,7 +245,7 @@ function applyExample(key: ExampleKey, c: NxCalendarEl) {
 }
 
 async function init() {
-  await customElements.whenDefined("nx-calendar");
+  await customElements.whenDefined('nx-calendar');
   await nextTick();
   const c = cal();
   if (!c) return;
@@ -264,33 +255,33 @@ async function init() {
 }
 
 function attachEventListeners(c: NxCalendarEl) {
-  c.addEventListener("eventClick", (e: Event) => {
+  c.addEventListener('eventClick', (e: Event) => {
     const ev = (e as CustomEvent).detail?.event ?? (e as CustomEvent).detail;
-    window.alert("Event clicked: " + ev.title);
+    window.alert('Event clicked: ' + ev.title);
   });
-  c.addEventListener("dateClick", (e: Event) => {
+  c.addEventListener('dateClick', (e: Event) => {
     const { date, allDay } = (e as CustomEvent).detail;
-    const title = window.prompt("New event title:");
+    const title = window.prompt('New event title:');
     if (title) {
       c.addEvent({
         title,
         start: date,
         allDay,
         backgroundColor:
-          "#" +
+          '#' +
           Math.floor(Math.random() * 16777215)
             .toString(16)
-            .padStart(6, "0"),
+            .padStart(6, '0'),
       });
     }
   });
-  c.addEventListener("eventDrop", (e: Event) => {
+  c.addEventListener('eventDrop', (e: Event) => {
     const { event, oldStart, newStart } = (e as CustomEvent).detail;
-    console.log("Event moved:", event.title, "from", oldStart, "to", newStart);
+    console.log('Event moved:', event.title, 'from', oldStart, 'to', newStart);
   });
-  c.addEventListener("eventResize", (e: Event) => {
+  c.addEventListener('eventResize', (e: Event) => {
     const { event, oldEnd, newEnd } = (e as CustomEvent).detail;
-    console.log("Event resized:", event.title, "from", oldEnd, "to", newEnd);
+    console.log('Event resized:', event.title, 'from', oldEnd, 'to', newEnd);
   });
 }
 
@@ -298,82 +289,83 @@ onMounted(init);
 
 watch(
   () => props.example,
-  (key) => {
+  key => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
       applyExample(key, c);
     });
-  },
+  }
 );
 
 watch(
   () => props.lang,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
       c.locale = v;
       c.requestUpdate();
     });
-  },
+  }
 );
 
 watch(
   () => props.view,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
       c.views = getExampleViews(props.example);
       c.view = getValidView(props.example, v);
-      if (props.example === "resource-timeline") c.resources = RESOURCES;
+      if (props.example === 'resource-timeline') c.resources = RESOURCES;
       c.requestUpdate();
     });
-  },
+  }
 );
 
 watch(
   () => props.theme,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
       c.theme = v;
       c.requestUpdate();
     });
-  },
+  }
 );
 
 watch(
   () => props.eventLimit,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
-      if (props.example === "eventlimit") {
+      if (props.example === 'eventlimit') {
         c.dayMaxEvents = v ?? true;
         c.requestUpdate();
       }
     });
-  },
+  }
 );
 
 watch(
   () => [props.bizHours, props.example],
   ([v, ex]) => {
-    console.log('WATCH triggered - bizHours:', v, 'example:', ex)
+    console.log('WATCH triggered - bizHours:', v, 'example:', ex);
     nextTick(() => {
       const c = cal();
       if (!c) {
-        console.log('Calendar not ready yet')
-        return
+        console.log('Calendar not ready yet');
+        return;
       }
-      if (ex === "business" || ex === "full") {
+      if (ex === 'business' || ex === 'full') {
         // Force new object reference for Lit reactivity
-        const newBizHours = v === false ? false : Array.isArray(v) ? [...v.map(h => ({...h}))] : {...v}
+        const newBizHours =
+          v === false ? false : Array.isArray(v) ? [...v.map(h => ({ ...h }))] : { ...v };
         c.businessHours = newBizHours;
-        console.log('Set businessHours on calendar:', newBizHours)
+        console.log('Set businessHours on calendar:', newBizHours);
         c.requestUpdate();
       }
     });
@@ -383,106 +375,106 @@ watch(
 
 watch(
   () => props.showWeekends,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
-      if (props.example === "full") {
+      if (props.example === 'full') {
         c.weekends = v ?? true;
         c.requestUpdate();
       }
     });
-  },
+  }
 );
 
 watch(
   () => props.editable,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
-      if (props.example === "full") {
+      if (props.example === 'full') {
         c.editable = v ?? true;
         c.eventStartEditable = v ?? true;
         c.eventDurationEditable = v ?? true;
         c.requestUpdate();
       }
     });
-  },
+  }
 );
 
 watch(
   () => props.timezone,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
-      if (props.example === "timezones") {
+      if (props.example === 'timezones') {
         c.events = buildTimezoneEvents(v);
         c.requestUpdate();
       }
     });
-  },
+  }
 );
 
 watch(
   () => props.slotDuration,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
       c.slotDuration = v;
       c.requestUpdate();
     });
-  },
+  }
 );
 
 watch(
   () => props.hourHeight,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
       c.hourHeight = v;
       c.requestUpdate();
     });
-  },
+  }
 );
 
 watch(
   () => props.slotLabelFormat,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
       c.slotLabelFormat = v;
       c.requestUpdate();
     });
-  },
+  }
 );
 
 watch(
   () => props.minTime,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
       c.minTime = v;
       c.requestUpdate();
     });
-  },
+  }
 );
 
 watch(
   () => props.maxTime,
-  (v) => {
+  v => {
     nextTick(() => {
       const c = cal();
       if (!c) return;
       c.maxTime = v;
       c.requestUpdate();
     });
-  },
+  }
 );
 
 function addRandomEvent() {
@@ -490,23 +482,23 @@ function addRandomEvent() {
   if (!c) return;
   const today = new Date();
   const y = today.getFullYear();
-  const mo = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
-  const h = String(10 + Math.floor(Math.random() * 6)).padStart(2, "0");
+  const mo = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const h = String(10 + Math.floor(Math.random() * 6)).padStart(2, '0');
   c.addEvent({
-    title: "New Event",
+    title: 'New Event',
     start: `${y}-${mo}-${day}T${h}:00:00`,
     backgroundColor:
-      "#" +
+      '#' +
       Math.floor(Math.random() * 16777215)
         .toString(16)
-        .padStart(6, "0"),
+        .padStart(6, '0'),
   });
 }
 
 defineExpose({ addRandomEvent });
 
-type HandlerKind = "selectable" | "dragdrop";
+type HandlerKind = 'selectable' | 'dragdrop';
 
 interface SnippetConfig {
   declarations: string[];
@@ -515,9 +507,9 @@ interface SnippetConfig {
 }
 
 function serializeBusinessHours(value: typeof props.bizHours): string {
-  if (value === false) return "false";
+  if (value === false) return 'false';
   const hours = value || BIZ_HOURS;
-  return `{ daysOfWeek: [${hours.daysOfWeek.join(", ")}], startTime: '${hours.startTime}', endTime: '${hours.endTime}' }`;
+  return `{ daysOfWeek: [${hours.daysOfWeek.join(', ')}], startTime: '${hours.startTime}', endTime: '${hours.endTime}' }`;
 }
 
 function baseEventsSnippet(): string {
@@ -581,8 +573,7 @@ const events = [
 }
 
 function timezoneEventsSnippet(timezoneCode: string): string {
-  const timezone =
-    TIMEZONES.find((item) => item.code === timezoneCode) ?? TIMEZONES[0];
+  const timezone = TIMEZONES.find(item => item.code === timezoneCode) ?? TIMEZONES[0];
   return `const timezone = '${timezone.code}'
 const timezoneOffset = '${timezone.offset}'
 const utcEvents = [
@@ -617,209 +608,194 @@ function getSnippetConfig(
   ex: ExampleKey,
   vw: ViewType,
   lang: string,
-  theme: NxTheme,
+  theme: NxTheme
 ): SnippetConfig {
   const declarations = [
     `const view = '${vw}'`,
     `const locale = '${lang}'`,
     `const theme = '${theme}'`,
     `const views = [${getExampleViews(ex)
-      .map((viewName) => `'${viewName}'`)
-      .join(", ")}]`,
+      .map(viewName => `'${viewName}'`)
+      .join(', ')}]`,
   ];
 
   switch (ex) {
-    case "full":
+    case 'full':
       declarations.push(
         baseEventsSnippet(),
-        `const editable = ${props.editable !== undefined ? String(props.editable) : "true"}`,
-        "const dayMaxEvents = 5",
-        `const weekends = ${props.showWeekends !== undefined ? String(props.showWeekends) : "true"}`,
+        `const editable = ${props.editable !== undefined ? String(props.editable) : 'true'}`,
+        'const dayMaxEvents = 5',
+        `const weekends = ${props.showWeekends !== undefined ? String(props.showWeekends) : 'true'}`,
         `const businessHours = ${serializeBusinessHours(props.bizHours)}`,
         `const slotDuration = ${props.slotDuration ?? 60}`,
         `const hourHeight = ${props.hourHeight ?? 48}`,
-        `const slotLabelFormat = '${props.slotLabelFormat ?? "h:mm a"}'`,
-        `const minTime = '${props.minTime ?? "00:00"}'`,
-        `const maxTime = '${props.maxTime ?? "24:00"}'`,
+        `const slotLabelFormat = '${props.slotLabelFormat ?? 'h:mm a'}'`,
+        `const minTime = '${props.minTime ?? '00:00'}'`,
+        `const maxTime = '${props.maxTime ?? '24:00'}'`
       );
       return {
         declarations,
         propNames: [
-          "view",
-          "locale",
-          "theme",
-          "views",
-          "events",
-          "editable",
-          "dayMaxEvents",
-          "weekends",
-          "businessHours",
-          "slotDuration",
-          "hourHeight",
-          "slotLabelFormat",
-          "minTime",
-          "maxTime",
+          'view',
+          'locale',
+          'theme',
+          'views',
+          'events',
+          'editable',
+          'dayMaxEvents',
+          'weekends',
+          'businessHours',
+          'slotDuration',
+          'hourHeight',
+          'slotLabelFormat',
+          'minTime',
+          'maxTime',
         ],
       };
 
-    case "business":
+    case 'business':
       declarations.push(
         baseEventsSnippet(),
         `const businessHours = ${serializeBusinessHours(props.bizHours)}`,
-        "const weekends = false",
-        "const showNonCurrentDates = false",
+        'const weekends = false',
+        'const showNonCurrentDates = false'
       );
       return {
         declarations,
         propNames: [
-          "view",
-          "locale",
-          "theme",
-          "views",
-          "events",
-          "businessHours",
-          "weekends",
-          "showNonCurrentDates",
+          'view',
+          'locale',
+          'theme',
+          'views',
+          'events',
+          'businessHours',
+          'weekends',
+          'showNonCurrentDates',
         ],
       };
 
-    case "minimal":
-      declarations.push(baseEventsSnippet(), "const editable = false");
+    case 'minimal':
+      declarations.push(baseEventsSnippet(), 'const editable = false');
       return {
         declarations,
-        propNames: ["view", "locale", "theme", "views", "events", "editable"],
+        propNames: ['view', 'locale', 'theme', 'views', 'events', 'editable'],
       };
 
-    case "noweekends":
+    case 'noweekends':
       declarations.push(
         baseEventsSnippet(),
-        "const weekends = false",
-        "const showNonCurrentDates = false",
+        'const weekends = false',
+        'const showNonCurrentDates = false'
       );
       return {
         declarations,
         propNames: [
-          "view",
-          "locale",
-          "theme",
-          "views",
-          "events",
-          "weekends",
-          "showNonCurrentDates",
+          'view',
+          'locale',
+          'theme',
+          'views',
+          'events',
+          'weekends',
+          'showNonCurrentDates',
         ],
       };
 
-    case "eventlimit":
-      declarations.push(
-        baseEventsSnippet(),
-        `const dayMaxEvents = ${props.eventLimit ?? 3}`,
-      );
+    case 'eventlimit':
+      declarations.push(baseEventsSnippet(), `const dayMaxEvents = ${props.eventLimit ?? 3}`);
       return {
         declarations,
-        propNames: [
-          "view",
-          "locale",
-          "theme",
-          "views",
-          "events",
-          "dayMaxEvents",
-        ],
+        propNames: ['view', 'locale', 'theme', 'views', 'events', 'dayMaxEvents'],
       };
 
-    case "timeline":
+    case 'timeline':
       declarations.push(timelineEventsSnippet());
       return {
         declarations,
-        propNames: ["view", "locale", "theme", "views", "events"],
+        propNames: ['view', 'locale', 'theme', 'views', 'events'],
       };
 
-    case "resource-timeline":
+    case 'resource-timeline':
       declarations.push(resourceTimelineSnippet());
       return {
         declarations,
-        propNames: ["view", "locale", "theme", "views", "resources", "events"],
+        propNames: ['view', 'locale', 'theme', 'views', 'resources', 'events'],
       };
 
-    case "year":
+    case 'year':
       declarations.push(baseEventsSnippet());
       return {
         declarations,
-        propNames: ["view", "locale", "theme", "views", "events"],
+        propNames: ['view', 'locale', 'theme', 'views', 'events'],
       };
 
-    case "drag-drop":
+    case 'drag-drop':
       declarations.push(
         dragDropEventsSnippet(),
-        "const editable = true",
-        "const eventStartEditable = true",
-        "const eventDurationEditable = true",
+        'const editable = true',
+        'const eventStartEditable = true',
+        'const eventDurationEditable = true'
       );
       return {
         declarations,
         propNames: [
-          "view",
-          "locale",
-          "theme",
-          "views",
-          "events",
-          "editable",
-          "eventStartEditable",
-          "eventDurationEditable",
+          'view',
+          'locale',
+          'theme',
+          'views',
+          'events',
+          'editable',
+          'eventStartEditable',
+          'eventDurationEditable',
         ],
-        handler: "dragdrop",
+        handler: 'dragdrop',
       };
 
-    case "background-events":
+    case 'background-events':
       declarations.push(backgroundEventsSnippet());
       return {
         declarations,
-        propNames: ["view", "locale", "theme", "views", "events"],
+        propNames: ['view', 'locale', 'theme', 'views', 'events'],
       };
 
-    case "selectable":
+    case 'selectable':
       declarations.push(baseEventsSnippet());
       return {
         declarations,
-        propNames: ["view", "locale", "theme", "views", "events"],
-        handler: "selectable",
+        propNames: ['view', 'locale', 'theme', 'views', 'events'],
+        handler: 'selectable',
       };
 
-    case "locales":
+    case 'locales':
       declarations.push(baseEventsSnippet());
       return {
         declarations,
-        propNames: ["view", "locale", "theme", "views", "events"],
+        propNames: ['view', 'locale', 'theme', 'views', 'events'],
       };
 
-    case "theming":
+    case 'theming':
       declarations.push(baseEventsSnippet());
       return {
         declarations,
-        propNames: ["view", "locale", "theme", "views", "events"],
+        propNames: ['view', 'locale', 'theme', 'views', 'events'],
       };
 
-    case "timezones":
-      declarations.push(
-        timezoneEventsSnippet(props.timezone ?? "America/New_York"),
-      );
+    case 'timezones':
+      declarations.push(timezoneEventsSnippet(props.timezone ?? 'America/New_York'));
       return {
         declarations,
-        propNames: ["view", "locale", "theme", "views", "events"],
+        propNames: ['view', 'locale', 'theme', 'views', 'events'],
       };
 
     default:
       declarations.push(baseEventsSnippet());
       return {
         declarations,
-        propNames: ["view", "locale", "theme", "views", "events"],
+        propNames: ['view', 'locale', 'theme', 'views', 'events'],
       };
   }
 }
 
-function getSnippetHandlers(
-  kind: HandlerKind | undefined,
-  framework: FrameworkKey,
-) {
+function getSnippetHandlers(kind: HandlerKind | undefined, framework: FrameworkKey) {
   if (!kind) {
     return {
       declarations: [] as string[],
@@ -828,8 +804,8 @@ function getSnippetHandlers(
     };
   }
 
-  if (kind === "selectable") {
-    if (framework === "react") {
+  if (kind === 'selectable') {
+    if (framework === 'react') {
       return {
         declarations: [
           `const handleDateClick = (event: CustomEvent<{ date: string; allDay: boolean }>) => {
@@ -838,12 +814,12 @@ function getSnippetHandlers(
   if (title) console.log({ title, date, allDay })
 }`,
         ],
-        bindings: ["onDateClick={handleDateClick}"],
+        bindings: ['onDateClick={handleDateClick}'],
         webSetup: [],
       };
     }
 
-    if (framework === "vue") {
+    if (framework === 'vue') {
       return {
         declarations: [
           `const handleDateClick = ({ date, allDay }: { date: string; allDay: boolean }) => {
@@ -856,7 +832,7 @@ function getSnippetHandlers(
       };
     }
 
-    if (framework === "svelte") {
+    if (framework === 'svelte') {
       return {
         declarations: [
           `function handleDateClick(event: CustomEvent<{ date: string; allDay: boolean }>) {
@@ -865,7 +841,7 @@ function getSnippetHandlers(
   if (title) console.log({ title, date, allDay })
 }`,
         ],
-        bindings: ["on:dateClick={handleDateClick}"],
+        bindings: ['on:dateClick={handleDateClick}'],
         webSetup: [],
       };
     }
@@ -883,7 +859,7 @@ function getSnippetHandlers(
     };
   }
 
-  if (framework === "react") {
+  if (framework === 'react') {
     return {
       declarations: [
         `const handleEventDrop = (event: CustomEvent) => {
@@ -894,15 +870,12 @@ const handleEventResize = (event: CustomEvent) => {
   console.log('eventResize', event.detail)
 }`,
       ],
-      bindings: [
-        "onEventDrop={handleEventDrop}",
-        "onEventResize={handleEventResize}",
-      ],
+      bindings: ['onEventDrop={handleEventDrop}', 'onEventResize={handleEventResize}'],
       webSetup: [],
     };
   }
 
-  if (framework === "vue") {
+  if (framework === 'vue') {
     return {
       declarations: [
         `const handleEventDrop = (payload: unknown) => {
@@ -913,15 +886,12 @@ const handleEventResize = (payload: unknown) => {
   console.log('eventResize', payload)
 }`,
       ],
-      bindings: [
-        '@eventDrop="handleEventDrop"',
-        '@eventResize="handleEventResize"',
-      ],
+      bindings: ['@eventDrop="handleEventDrop"', '@eventResize="handleEventResize"'],
       webSetup: [],
     };
   }
 
-  if (framework === "svelte") {
+  if (framework === 'svelte') {
     return {
       declarations: [
         `function handleEventDrop(event: CustomEvent) {
@@ -932,10 +902,7 @@ function handleEventResize(event: CustomEvent) {
   console.log('eventResize', event.detail)
 }`,
       ],
-      bindings: [
-        "on:eventDrop={handleEventDrop}",
-        "on:eventResize={handleEventResize}",
-      ],
+      bindings: ['on:eventDrop={handleEventDrop}', 'on:eventResize={handleEventResize}'],
       webSetup: [],
     };
   }
@@ -963,16 +930,14 @@ function generateCode(
   vw: ViewType,
   lang: string,
   theme: NxTheme,
-  fw: FrameworkKey,
+  fw: FrameworkKey
 ): string {
   const config = getSnippetConfig(ex, vw, lang, theme);
   const handlers = getSnippetHandlers(config.handler, fw);
-  const scriptBody = [...config.declarations, ...handlers.declarations].join(
-    "\n\n",
-  );
+  const scriptBody = [...config.declarations, ...handlers.declarations].join('\n\n');
 
-  if (fw === "react") {
-    const propLines = config.propNames.map((name) => `      ${name}={${name}}`);
+  if (fw === 'react') {
+    const propLines = config.propNames.map(name => `      ${name}={${name}}`);
     return `import { NxCalendar } from '@nexa-calendar/react'
 
 ${scriptBody}
@@ -980,15 +945,15 @@ ${scriptBody}
 export function CalendarExample() {
   return (
     <NxCalendar
-${propLines.join("\n")}
-${handlers.bindings.map((binding) => `      ${binding}`).join("\n")}
+${propLines.join('\n')}
+${handlers.bindings.map(binding => `      ${binding}`).join('\n')}
     />
   )
 }`;
   }
 
-  if (fw === "vue") {
-    const propLines = config.propNames.map((name) => `    :${name}="${name}"`);
+  if (fw === 'vue') {
+    const propLines = config.propNames.map(name => `    :${name}="${name}"`);
     return `<script setup lang="ts">
 import { NxCalendar } from '@nexa-calendar/vue'
 
@@ -997,32 +962,32 @@ ${scriptBody}
 
 <template>
   <NxCalendar
-${propLines.join("\n")}
-${handlers.bindings.map((binding) => `    ${binding}`).join("\n")}
+${propLines.join('\n')}
+${handlers.bindings.map(binding => `    ${binding}`).join('\n')}
   />
 </template>`;
   }
 
-  if (fw === "svelte") {
-    const propLines = config.propNames.map((name) => `  ${name}={${name}}`);
+  if (fw === 'svelte') {
+    const propLines = config.propNames.map(name => `  ${name}={${name}}`);
     return `<script lang="ts">
   import NxCalendar from '@nexa-calendar/svelte/NxCalendar.svelte'
 
 ${scriptBody
-  .split("\n")
-  .map((line) => (line ? `  ${line}` : ""))
-  .join("\n")}
+  .split('\n')
+  .map(line => (line ? `  ${line}` : ''))
+  .join('\n')}
 <\/script>
 
 <NxCalendar
-${propLines.join("\n")}
-${handlers.bindings.map((binding) => `  ${binding}`).join("\n")}
+${propLines.join('\n')}
+${handlers.bindings.map(binding => `  ${binding}`).join('\n')}
 />`;
   }
 
   const setupLines = [
     "const cal = document.querySelector('nx-calendar')",
-    ...config.propNames.map((name) => `cal.${name} = ${name}`),
+    ...config.propNames.map(name => `cal.${name} = ${name}`),
     ...handlers.webSetup,
   ];
 
@@ -1032,11 +997,11 @@ ${handlers.bindings.map((binding) => `  ${binding}`).join("\n")}
   import '@nexa-calendar/ui'
 
 ${scriptBody
-  .split("\n")
-  .map((line) => (line ? `  ${line}` : ""))
-  .join("\n")}
+  .split('\n')
+  .map(line => (line ? `  ${line}` : ''))
+  .join('\n')}
 
-  ${setupLines.join("\n  ")}
+  ${setupLines.join('\n  ')}
 <\/script>`;
 }
 </script>

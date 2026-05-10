@@ -126,16 +126,27 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 </script>
 
 <style scoped>
-.features-page { min-height: 100vh; background: #020617; }
-.feature-item, .upcoming-item {
-  display: flex; align-items: flex-start; gap: 16px;
-  background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.05);
-  padding: 20px; border-radius: 12px;
+.features-page {
+  min-height: 100vh;
+  background: #020617;
 }
-.upcoming-item { opacity: 0.8; border-style: dashed; }
+.feature-item,
+.upcoming-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+}
+.upcoming-item {
+  opacity: 0.8;
+  border-style: dashed;
+}
 </style>

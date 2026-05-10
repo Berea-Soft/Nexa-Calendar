@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Nexa-Calendar custom properties */
@@ -19,22 +19,25 @@
   --nx-header-bg: #f9fafb;
   --nx-header-text: #374151;
   --nx-hover: #f3f4f6;
-  --nx-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);
+  --nx-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --nx-radius: 0.75rem;
 
   /* Additional Tailwind 4 theme extensions if needed */
-  --font-plus-jakarta: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-plus-jakarta: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
 /* Global resets and base styles */
 @layer base {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
 
-  html, body {
+  html,
+  body {
     height: 100%;
     font-family: var(--font-plus-jakarta);
     background-color: #020617;

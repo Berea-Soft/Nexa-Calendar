@@ -21,10 +21,18 @@
           <router-link to="/docs" class="nav-link" :class="{ active: $route.path === '/docs' }">
             {{ t('nav.docs') }}
           </router-link>
-          <router-link to="/features" class="nav-link" :class="{ active: $route.path === '/features' }">
+          <router-link
+            to="/features"
+            class="nav-link"
+            :class="{ active: $route.path === '/features' }"
+          >
             {{ t('nav.features') }}
           </router-link>
-          <router-link to="/support" class="nav-link" :class="{ active: $route.path === '/support' }">
+          <router-link
+            to="/support"
+            class="nav-link"
+            :class="{ active: $route.path === '/support' }"
+          >
             {{ t('nav.support') }}
           </router-link>
         </div>
@@ -33,7 +41,11 @@
           <!-- Language Picker -->
           <LangPicker v-model="locale" />
 
-          <a href="https://github.com/nexa-calendar/nexa-calendar" target="_blank" class="nav-github">
+          <a
+            href="https://github.com/nexa-calendar/nexa-calendar"
+            target="_blank"
+            class="nav-github"
+          >
             <IconGithub className="w-5 h-5" />
           </a>
         </div>
@@ -48,55 +60,104 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { IconGithub } from './components/common/icons'
-import LangPicker from './components/LangPicker.vue'
+import { watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { IconGithub } from './components/common/icons';
+import LangPicker from './components/LangPicker.vue';
 
-const { t, locale } = useI18n()
+const { t, locale } = useI18n();
 
 // Persist language choice
-watch(locale, (newLocale) => {
-  localStorage.setItem('nx-locale', newLocale)
-})
+watch(locale, newLocale => {
+  localStorage.setItem('nx-locale', newLocale);
+});
 </script>
 
 <style scoped>
 .navbar {
-  position: fixed; top: 0; left: 0; right: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
-  background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(12px);
+  background: rgba(2, 6, 23, 0.9);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .nav-container {
-  max-width: 1400px; margin: 0 auto; padding: 0 24px;
-  height: 64px; display: flex; align-items: center; justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nav-icon { font-size: 24px; }
-.nav-logo { font-size: 18px; font-weight: 700; color: white; }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-icon {
+  font-size: 24px;
+}
+.nav-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+}
 
-.nav-links { display: flex; gap: 8px; }
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
 .nav-link {
-  padding: 8px 16px; border-radius: 8px;
-  color: #94a3b8; text-decoration: none; font-weight: 500; font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
   transition: all 0.2s;
 }
-.nav-link:hover { color: white; background: rgba(255, 255, 255, 0.05); }
-.nav-link.active { color: white; background: rgba(99, 102, 241, 0.2); }
+.nav-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+}
+.nav-link.active {
+  color: white;
+  background: rgba(99, 102, 241, 0.2);
+}
 
-.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 
 .nav-github {
-  color: #64748b; transition: color 0.2s;
+  color: #64748b;
+  transition: color 0.2s;
 }
-.nav-github:hover { color: white; }
+.nav-github:hover {
+  color: white;
+}
 
-.main-content { flex: 1; margin-top: 64px; }
+.main-content {
+  flex: 1;
+  margin-top: 64px;
+}
 
 /* Page transitions */
-.fade-enter-active, .fade-leave-active { transition: opacity 0.2s; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

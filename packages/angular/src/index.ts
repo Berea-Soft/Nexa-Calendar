@@ -18,9 +18,9 @@
  *   })
  */
 
-import '@nexa-calendar/ui'
+import '@nexa-calendar/ui';
 
-export { NxCalendarComponent } from './nx-calendar.component'
+export { NxCalendarComponent } from './nx-calendar.component';
 export type {
   EventInput,
   ViewType,
@@ -30,5 +30,5 @@ export type {
   BusinessHours,
   DropPayload,
   ResourceInput,
-} from '@nexa-calendar/core'
-export type { NxTheme } from '@nexa-calendar/ui'
+} from '@nexa-calendar/core';
+export type { NxTheme } from '@nexa-calendar/ui';

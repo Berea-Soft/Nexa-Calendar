@@ -4,7 +4,10 @@
       <!-- Header -->
       <div class="mb-12">
         <h1 class="text-4xl font-bold text-white mb-4">🚀 Interactive Demos</h1>
-        <p class="text-slate-400 text-lg">Select a framework and explore interactive calendar examples. Edit the code in real-time and see the results instantly.</p>
+        <p class="text-slate-400 text-lg">
+          Select a framework and explore interactive calendar examples. Edit the code in real-time
+          and see the results instantly.
+        </p>
       </div>
 
       <!-- Framework Selector -->
@@ -17,7 +20,7 @@
             'px-6 py-3 rounded-lg font-semibold transition-all flex items-center gap-2',
             selectedFramework === fw.key
               ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg scale-105'
-              : 'bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 hover:text-white border border-slate-700/50'
+              : 'bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 hover:text-white border border-slate-700/50',
           ]"
         >
           <span class="text-xl">{{ fw.emoji }}</span>
@@ -27,7 +30,9 @@
 
       <!-- Example Selector -->
       <div class="mb-8">
-        <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Select Example</h3>
+        <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">
+          Select Example
+        </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <button
             v-for="example in currentExamples"
@@ -37,7 +42,7 @@
               'p-4 rounded-lg text-left transition-all border',
               selectedExample === example.key
                 ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-300'
-                : 'bg-slate-800/30 border-slate-700/30 text-slate-400 hover:border-slate-600/50 hover:bg-slate-800/50'
+                : 'bg-slate-800/30 border-slate-700/30 text-slate-400 hover:border-slate-600/50 hover:bg-slate-800/50',
             ]"
           >
             <div class="text-2xl mb-2">{{ example.emoji }}</div>
@@ -50,7 +55,9 @@
       <!-- Sandpack Container -->
       <div class="sandpack-wrapper">
         <div class="sandpack-header">
-          <h3 class="font-semibold text-white">{{ currentExample?.title }} · {{ currentFramework?.label }}</h3>
+          <h3 class="font-semibold text-white">
+            {{ currentExample?.title }} · {{ currentFramework?.label }}
+          </h3>
           <p class="text-xs text-slate-400 mt-1">Edit code below and see live preview</p>
         </div>
         <div class="sandpack-container">
@@ -69,78 +76,112 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { Sandpack } from 'sandpack-vue3'
+import { ref, computed } from 'vue';
+import { Sandpack } from 'sandpack-vue3';
 
-type FrameworkKey = 'vue' | 'react' | 'svelte'
+type FrameworkKey = 'vue' | 'react' | 'svelte';
 
 interface Framework {
-  key: FrameworkKey
-  label: string
-  emoji: string
+  key: FrameworkKey;
+  label: string;
+  emoji: string;
 }
 
 interface Example {
-  key: string
-  title: string
-  description: string
-  emoji: string
+  key: string;
+  title: string;
+  description: string;
+  emoji: string;
 }
 
 const frameworks: Framework[] = [
   { key: 'vue', label: 'Vue 3', emoji: '💚' },
   { key: 'react', label: 'React', emoji: '⚛️' },
   { key: 'svelte', label: 'Svelte', emoji: '🔥' },
-]
+];
 
 const examplesByFramework: Record<FrameworkKey, Example[]> = {
   vue: [
-    { key: 'basic', title: 'Basic Calendar', description: 'Simple month view with events', emoji: '📅' },
-    { key: 'interactive', title: 'Interactive', description: 'Drag, drop & create events', emoji: '✋' },
+    {
+      key: 'basic',
+      title: 'Basic Calendar',
+      description: 'Simple month view with events',
+      emoji: '📅',
+    },
+    {
+      key: 'interactive',
+      title: 'Interactive',
+      description: 'Drag, drop & create events',
+      emoji: '✋',
+    },
     { key: 'themes', title: 'Themes', description: 'Multiple theme styles', emoji: '🎨' },
     { key: 'timezones', title: 'Timezones', description: 'Handle multiple timezones', emoji: '🌐' },
     { key: 'responsive', title: 'Responsive', description: 'Mobile-friendly layout', emoji: '📱' },
     { key: 'advanced', title: 'Advanced', description: 'Custom slots & styling', emoji: '⚡' },
   ],
   react: [
-    { key: 'basic', title: 'Basic Calendar', description: 'Simple month view with events', emoji: '📅' },
-    { key: 'interactive', title: 'Interactive', description: 'Drag, drop & create events', emoji: '✋' },
+    {
+      key: 'basic',
+      title: 'Basic Calendar',
+      description: 'Simple month view with events',
+      emoji: '📅',
+    },
+    {
+      key: 'interactive',
+      title: 'Interactive',
+      description: 'Drag, drop & create events',
+      emoji: '✋',
+    },
     { key: 'hooks', title: 'Custom Hooks', description: 'Event management hooks', emoji: '🎣' },
     { key: 'timezones', title: 'Timezones', description: 'Handle multiple timezones', emoji: '🌐' },
     { key: 'responsive', title: 'Responsive', description: 'Mobile-friendly layout', emoji: '📱' },
     { key: 'advanced', title: 'Advanced', description: 'Custom components', emoji: '⚡' },
   ],
   svelte: [
-    { key: 'basic', title: 'Basic Calendar', description: 'Simple month view with events', emoji: '📅' },
-    { key: 'interactive', title: 'Interactive', description: 'Reactive event handling', emoji: '✋' },
+    {
+      key: 'basic',
+      title: 'Basic Calendar',
+      description: 'Simple month view with events',
+      emoji: '📅',
+    },
+    {
+      key: 'interactive',
+      title: 'Interactive',
+      description: 'Reactive event handling',
+      emoji: '✋',
+    },
     { key: 'stores', title: 'Svelte Stores', description: 'State management', emoji: '💾' },
     { key: 'timezones', title: 'Timezones', description: 'Handle multiple timezones', emoji: '🌐' },
     { key: 'responsive', title: 'Responsive', description: 'Mobile-friendly layout', emoji: '📱' },
     { key: 'advanced', title: 'Advanced', description: 'Animations & transitions', emoji: '⚡' },
   ],
-}
+};
 
-const selectedFramework = ref<FrameworkKey>('vue')
-const selectedExample = ref('basic')
+const selectedFramework = ref<FrameworkKey>('vue');
+const selectedExample = ref('basic');
 
-const currentFramework = computed(() => frameworks.find(f => f.key === selectedFramework.value))
-const currentExamples = computed(() => examplesByFramework[selectedFramework.value])
-const currentExample = computed(() => 
-  currentExamples.value.find(e => e.key === selectedExample.value) || currentExamples.value[0]
-)
+const currentFramework = computed(() => frameworks.find(f => f.key === selectedFramework.value));
+const currentExamples = computed(() => examplesByFramework[selectedFramework.value]);
+const currentExample = computed(
+  () => currentExamples.value.find(e => e.key === selectedExample.value) || currentExamples.value[0]
+);
 
 const sandpackTemplate = computed(() => {
-  return selectedFramework.value === 'vue' ? 'vue3' : selectedFramework.value === 'react' ? 'react' : 'svelte'
-})
+  return selectedFramework.value === 'vue'
+    ? 'vue3'
+    : selectedFramework.value === 'react'
+      ? 'react'
+      : 'svelte';
+});
 
 const customSetup = computed(() => ({
   dependencies: {
     '@nexa-calendar/vue': 'latest',
     '@nexa-calendar/react': 'latest',
     '@nexa-calendar/ui': 'latest',
-    'lit': '^3.0.0',
-  }
-}))
+    lit: '^3.0.0',
+  },
+}));
 
 const sandpackOptions = {
   showTabs: true,
@@ -150,7 +191,7 @@ const sandpackOptions = {
   wrapContent: false,
   closableTabs: false,
   editorHeight: 700,
-}
+};
 
 const vueExamples: Record<string, Record<string, string>> = {
   basic: {
@@ -197,7 +238,7 @@ const handleEventClick = (event) => {
   background: #f8fafc;
   border-radius: 8px;
 }
-</style>`
+</style>`,
   },
   interactive: {
     '/src/App.vue': `<script setup>
@@ -251,7 +292,7 @@ const handleEventDrop = (event, newStart) => {
   background: #f8fafc;
   border-radius: 8px;
 }
-</style>`
+</style>`,
   },
   themes: {
     '/src/App.vue': `<script setup>
@@ -299,7 +340,7 @@ const events = ref([
   background: #f8fafc;
   border-radius: 8px;
 }
-</style>`
+</style>`,
   },
   timezones: {
     '/src/App.vue': `<script setup>
@@ -345,7 +386,7 @@ const events = ref([
   background: #f8fafc;
   border-radius: 8px;
 }
-</style>`
+</style>`,
   },
   responsive: {
     '/src/App.vue': `<script setup>
@@ -385,7 +426,7 @@ const events = ref([
     height: 400px;
   }
 }
-</style>`
+</style>`,
   },
   advanced: {
     '/src/App.vue': `<script setup>
@@ -428,9 +469,9 @@ const events = ref([
   background: #f8fafc;
   border-radius: 8px;
 }
-</style>`
-  }
-}
+</style>`,
+  },
+};
 
 const reactExamples: Record<string, Record<string, string>> = {
   basic: {
@@ -459,7 +500,7 @@ export default function App() {
   padding: 20px;
   background: #f8fafc;
   border-radius: 8px;
-}`
+}`,
   },
   interactive: {
     '/App.jsx': `import { useState } from 'react'
@@ -506,7 +547,7 @@ export default function App() {
   background: #dbeafe;
   border-radius: 0.5rem;
   font-size: 0.875rem;
-}`
+}`,
   },
   hooks: {
     '/App.jsx': `import { useState, useCallback } from 'react'
@@ -541,7 +582,7 @@ export default function App() {
   padding: 20px;
   background: #f8fafc;
   border-radius: 8px;
-}`
+}`,
   },
   timezones: {
     '/App.jsx': `import { useState } from 'react'
@@ -582,7 +623,7 @@ export default function App() {
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 0.25rem;
-}`
+}`,
   },
   responsive: {
     '/App.jsx': `import { useState, useEffect } from 'react'
@@ -615,7 +656,7 @@ export default function App() {
   .calendar-wrapper {
     height: 400px;
   }
-}`
+}`,
   },
   advanced: {
     '/App.jsx': `import NxCalendar from '@nexa-calendar/react'
@@ -651,9 +692,9 @@ export default function App() {
 
 .custom-event {
   padding: 0.5rem;
-}`
-  }
-}
+}`,
+  },
+};
 
 const svelteExamples: Record<string, Record<string, string>> = {
   basic: {
@@ -677,7 +718,7 @@ const svelteExamples: Record<string, Record<string, string>> = {
     background: #f8fafc;
     border-radius: 8px;
   }
-</style>`
+</style>`,
   },
   interactive: {
     '/App.svelte': `<script>
@@ -715,7 +756,7 @@ const svelteExamples: Record<string, Record<string, string>> = {
     border-radius: 0.5rem;
     font-size: 0.875rem;
   }
-</style>`
+</style>`,
   },
   stores: {
     '/App.svelte': `<script>
@@ -739,7 +780,7 @@ const svelteExamples: Record<string, Record<string, string>> = {
     background: #f8fafc;
     border-radius: 8px;
   }
-</style>`
+</style>`,
   },
   timezones: {
     '/App.svelte': `<script>
@@ -778,7 +819,7 @@ const svelteExamples: Record<string, Record<string, string>> = {
     border: 1px solid #ccc;
     border-radius: 0.25rem;
   }
-</style>`
+</style>`,
   },
   responsive: {
     '/App.svelte': `<script>
@@ -811,7 +852,7 @@ const svelteExamples: Record<string, Record<string, string>> = {
       height: 400px;
     }
   }
-</style>`
+</style>`,
   },
   advanced: {
     '/App.svelte': `<script>
@@ -844,18 +885,18 @@ const svelteExamples: Record<string, Record<string, string>> = {
   .custom-event {
     padding: 0.5rem;
   }
-</style>`
-  }
-}
+</style>`,
+  },
+};
 
 const currentFiles = computed(() => {
-  const fw = selectedFramework.value
-  const ex = selectedExample.value
-  
-  if (fw === 'vue') return vueExamples[ex] || vueExamples.basic
-  if (fw === 'react') return reactExamples[ex] || reactExamples.basic
-  return svelteExamples[ex] || svelteExamples.basic
-})
+  const fw = selectedFramework.value;
+  const ex = selectedExample.value;
+
+  if (fw === 'vue') return vueExamples[ex] || vueExamples.basic;
+  if (fw === 'react') return reactExamples[ex] || reactExamples.basic;
+  return svelteExamples[ex] || svelteExamples.basic;
+});
 </script>
 
 <style scoped>
@@ -870,7 +911,9 @@ const currentFiles = computed(() => {
   border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.3),
+    0 8px 10px -6px rgba(0, 0, 0, 0.2);
   height: 700px;
 }
 

@@ -13,11 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import { VIEWS } from '../data'
-import type { ViewType } from '../data'
+import { VIEWS } from '../data';
+import type { ViewType } from '../data';
 
-defineProps<{ modelValue: ViewType }>()
-defineEmits<{ (e: 'update:modelValue', v: ViewType): void }>()
+defineProps<{ modelValue: ViewType }>();
+defineEmits<{ (e: 'update:modelValue', v: ViewType): void }>();
 </script>
 
 <style scoped>
@@ -37,6 +37,13 @@ defineEmits<{ (e: 'update:modelValue', v: ViewType): void }>()
   color: #94a3b8;
   transition: all 0.15s;
 }
-.view-btn:hover { background: #334155; color: #f1f5f9; }
-.view-btn.active { background: #475569; border-color: #64748b; color: #f1f5f9; }
+.view-btn:hover {
+  background: #334155;
+  color: #f1f5f9;
+}
+.view-btn.active {
+  background: #475569;
+  border-color: #64748b;
+  color: #f1f5f9;
+}
 </style>
