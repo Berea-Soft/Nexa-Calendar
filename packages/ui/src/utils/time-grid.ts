@@ -99,7 +99,7 @@ export function isBusinessTimeSlot(
   totalMinutes: number,
   businessHours: BusinessHours | BusinessHours[] | boolean
 ): boolean {
-  console.log('isBusinessTimeSlot called:', { businessHours, totalMinutes, date: date.toISO() });
+  console.log('isBusinessTimeSlot called:', { businessHours, totalMinutes, date: date.toString() });
   if (!businessHours) return true;
   if (typeof businessHours === 'boolean') return businessHours;
 

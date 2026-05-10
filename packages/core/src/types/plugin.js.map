@@ -1,1 +1,0 @@
-{"version":3,"file":"plugin.js","sourceRoot":"","sources":["plugin.ts"],"names":[],"mappings":"","sourcesContent":["import { CalendarStore } from '../domain/store'\n\nexport interface ICalendarPlugin {\n  readonly name: string\n  readonly version: string\n  install(store: CalendarStore): void\n}\n"]}

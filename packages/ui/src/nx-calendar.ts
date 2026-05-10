@@ -200,6 +200,8 @@ export class NxCalendar extends LitElement {
         return DateUtils.getTimelineRange(date);
       case 'year':
         return { start: date.startOf('year'), end: date.endOf('year') };
+      default:
+        return DateUtils.getMonthRange(date);
     }
   }
 

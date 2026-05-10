@@ -406,9 +406,12 @@ class TimelineWorkWeekView extends TimelineView {
 
   override generateGrid(
     range: { start: TimeGuard; end: TimeGuard },
-    events: ICalendarEvent[]
-  ): TimelineGrid {
-    return this._buildTimelineGrid(range, events, 5);
+    events: ICalendarEvent[],
+    _resources?: IResource[]
+  ): TimelineGrid | ResourceTimelineGrid {
+    const columns = this._generateColumns(range, 5);
+    const eventRows = this._layoutEvents(events, range, columns);
+    return { columns, eventRows };
   }
 }
 
