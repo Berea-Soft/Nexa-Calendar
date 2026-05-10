@@ -13,21 +13,26 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
+        manualChunks: id => {
           if (id.includes('sandpack-vue3') || id.includes('@codesandbox/sandpack-react')) {
-            return 'sandpack'
+            return 'sandpack';
           }
-          if (id.includes('node_modules/vue') || id.includes('node_modules/@vue') || id.includes('vue-router') || id.includes('vue-i18n')) {
-            return 'vue'
+          if (
+            id.includes('node_modules/vue') ||
+            id.includes('node_modules/@vue') ||
+            id.includes('vue-router') ||
+            id.includes('vue-i18n')
+          ) {
+            return 'vue';
           }
           if (id.includes('node_modules/react') || id.includes('node_modules/@types/react')) {
-            return 'react'
+            return 'react';
           }
           if (id.includes('node_modules/svelte')) {
-            return 'svelte'
+            return 'svelte';
           }
           if (id.includes('@nexa-calendar')) {
-            return 'calendar'
+            return 'calendar';
           }
         },
       },
