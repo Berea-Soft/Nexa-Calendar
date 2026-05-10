@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "demo": "Démo",
+    "docs": "Docs",
+    "features": "Fonctionnalités",
+    "support": "Support"
+  },
+  "home": {
+    "title": "Le Calendrier Moderne",
+    "subtitle": "Une alternative à FullCalendar construite avec Web Components",
+    "cta": "Essayer",
+    "github": "Star sur GitHub"
+  },
+  "features": {
+    "title": "Fonctionnalités et Roadmap",
+    "current": "Actuelles",
+    "upcoming": "À venir"
+  },
+  "support": {
+    "title": "Support et Contribution",
+    "donate": "Donner",
+    "sponsors": "Sponsors",
+    "contribute": "Contribuer",
+    "community": "Communauté"
+  },
+  "docs": {
+    "title": "Documentation",
+    "gettingStarted": "Commencer",
+    "api": "Référence API",
+    "examples": "Exemples"
+  }
+}

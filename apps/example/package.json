@@ -1,0 +1,34 @@
+{
+  "name": "demos-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@nexa-calendar/core": "workspace:*",
+    "@nexa-calendar/ui": "workspace:*",
+    "@nexa-calendar/vue": "workspace:*",
+    "@nexa-calendar/angular": "workspace:*",
+    "@nexa-calendar/svelte": "workspace:*",
+    "@nexa-calendar/react": "workspace:*",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "sandpack-vue3": "^3.1.12",
+    "@codesandbox/sandpack-react": "^2.20.0",
+    "lit": "^3.0.0",
+    "vue": "^3.5.34",
+    "vue-router": "^4.5.0",
+    "vue-i18n": "^11.1.0",
+    "svelte": "^4.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.0",
+    "tailwindcss": "^4.3.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0"
+  }
+}

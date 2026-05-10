@@ -1,0 +1,9 @@
+{
+  "buildCommand": "pnpm --filter demos-app build",
+  "outputDirectory": "apps/example/dist",
+  "framework": "vite",
+  "installCommand": "pnpm install",
+  "devCommand": "pnpm dev",
+  "teamId": "team_hl1W3IuLgt2Se3nMXyBsmBDH",
+  "projectId": ""
+}

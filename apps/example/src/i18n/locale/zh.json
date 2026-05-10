@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "首页",
+    "demo": "演示",
+    "docs": "文档",
+    "features": "功能",
+    "support": "支持"
+  },
+  "home": {
+    "title": "现代日历",
+    "subtitle": "基于 Web Components 构建的 FullCalendar 替代品",
+    "cta": "试用演示",
+    "github": "在 GitHub 上 Star"
+  },
+  "features": {
+    "title": "功能与路线图",
+    "current": "当前功能",
+    "upcoming": "即将推出"
+  },
+  "support": {
+    "title": "支持与贡献",
+    "donate": "捐赠",
+    "sponsors": "赞助商",
+    "contribute": "贡献",
+    "community": "社区"
+  },
+  "docs": {
+    "title": "文档",
+    "gettingStarted": "入门",
+    "api": "API 参考",
+    "examples": "示例"
+  }
+}

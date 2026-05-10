@@ -1,0 +1,20 @@
+{
+  "name": "@nexa-calendar/angular",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "dependencies": {
+    "@nexa-calendar/ui": "workspace:*"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=17",
+    "@angular/common": ">=17"
+  }
+}

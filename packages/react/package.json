@@ -1,0 +1,13 @@
+{
+  "name": "@nexa-calendar/react",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@nexa-calendar/ui": "workspace:*",
+    "@lit-labs/react": "^2.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}

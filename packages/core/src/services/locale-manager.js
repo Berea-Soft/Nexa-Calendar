@@ -1,0 +1,217 @@
+const enLocale = {
+    code: 'en',
+    direction: 'ltr',
+    weekdays: {
+        shorthand: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        long: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    },
+    months: {
+        shorthand: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        long: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    },
+    buttonText: {
+        today: 'Today',
+        month: 'Month',
+        week: 'Week',
+        day: 'Day',
+        list: 'List',
+        prev: 'Prev',
+        next: 'Next',
+    },
+    titleFormats: {
+        month: 'MMMM YYYY',
+        week: 'MMM D, YYYY',
+        day: 'dddd, MMM D, YYYY',
+        list: 'MMM D YYYY',
+    },
+    moreLinkText: (n) => `+${n} more`,
+    noEventsText: 'No events in this range',
+    timeFormat: 'h:mm a',
+};
+const esLocale = {
+    code: 'es',
+    direction: 'ltr',
+    weekdays: {
+        shorthand: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+        long: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    },
+    months: {
+        shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        long: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    },
+    buttonText: {
+        today: 'Hoy',
+        month: 'Mes',
+        week: 'Semana',
+        day: 'Día',
+        list: 'Lista',
+        prev: 'Ant',
+        next: 'Sig',
+    },
+    titleFormats: {
+        month: 'MMMM [de] YYYY',
+        week: '[Semana del] D MMM, YYYY',
+        day: 'dddd, D [de] MMMM [de] YYYY',
+        list: 'D MMM YYYY',
+    },
+    moreLinkText: (n) => `+${n} más`,
+    noEventsText: 'No hay eventos en este rango',
+    timeFormat: 'H:mm',
+};
+const frLocale = {
+    code: 'fr',
+    direction: 'ltr',
+    weekdays: {
+        shorthand: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        long: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    },
+    months: {
+        shorthand: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
+        long: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+    },
+    buttonText: { today: "Aujourd'hui", month: 'Mois', week: 'Semaine', day: 'Jour', list: 'Liste', prev: 'Préc', next: 'Suiv' },
+    titleFormats: { month: 'MMMM YYYY', week: 'D MMM, YYYY', day: 'dddd D MMMM YYYY', list: 'D MMM YYYY' },
+    moreLinkText: (n) => `+${n} de plus`,
+    noEventsText: 'Aucun événement dans cette plage',
+    timeFormat: 'HH:mm',
+};
+const deLocale = {
+    code: 'de',
+    direction: 'ltr',
+    weekdays: {
+        shorthand: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+        long: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+    },
+    months: {
+        shorthand: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+        long: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+    },
+    buttonText: { today: 'Heute', month: 'Monat', week: 'Woche', day: 'Tag', list: 'Liste', prev: 'Zurück', next: 'Vor' },
+    titleFormats: { month: 'MMMM YYYY', week: 'D. MMM YYYY', day: 'dddd, D. MMMM YYYY', list: 'D. MMM YYYY' },
+    moreLinkText: (n) => `+${n} weitere`,
+    noEventsText: 'Keine Ereignisse in diesem Zeitraum',
+    timeFormat: 'HH:mm',
+};
+const ptLocale = {
+    code: 'pt',
+    direction: 'ltr',
+    weekdays: {
+        shorthand: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+        long: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+    },
+    months: {
+        shorthand: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        long: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    },
+    buttonText: { today: 'Hoje', month: 'Mês', week: 'Semana', day: 'Dia', list: 'Lista', prev: 'Ant', next: 'Próx' },
+    titleFormats: { month: 'MMMM [de] YYYY', week: 'D [de] MMM YYYY', day: 'dddd, D [de] MMMM [de] YYYY', list: 'D MMM YYYY' },
+    moreLinkText: (n) => `+${n} mais`,
+    noEventsText: 'Sem eventos neste intervalo',
+    timeFormat: 'HH:mm',
+};
+const itLocale = {
+    code: 'it',
+    direction: 'ltr',
+    weekdays: {
+        shorthand: ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
+        long: ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+    },
+    months: {
+        shorthand: ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
+        long: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
+    },
+    buttonText: { today: 'Oggi', month: 'Mese', week: 'Settimana', day: 'Giorno', list: 'Lista', prev: 'Prec', next: 'Succ' },
+    titleFormats: { month: 'MMMM YYYY', week: 'D MMM YYYY', day: 'dddd D MMMM YYYY', list: 'D MMM YYYY' },
+    moreLinkText: (n) => `+${n} altri`,
+    noEventsText: 'Nessun evento in questo intervallo',
+    timeFormat: 'HH:mm',
+};
+const zhLocale = {
+    code: 'zh',
+    direction: 'ltr',
+    weekdays: {
+        shorthand: ['日', '一', '二', '三', '四', '五', '六'],
+        long: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+    },
+    months: {
+        shorthand: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        long: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+    },
+    buttonText: { today: '今天', month: '月', week: '周', day: '日', list: '列表', prev: '上一', next: '下一' },
+    titleFormats: { month: 'YYYY年M月', week: 'YYYY年M月D日', day: 'YYYY年M月D日 dddd', list: 'YYYY年M月D日' },
+    moreLinkText: (n) => `+${n} 更多`,
+    noEventsText: '此范围内没有事件',
+    timeFormat: 'HH:mm',
+};
+const arLocale = {
+    code: 'ar',
+    direction: 'rtl',
+    weekdays: {
+        shorthand: ['أحد', 'إثن', 'ثلا', 'أرب', 'خمي', 'جمع', 'سبت'],
+        long: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+    },
+    months: {
+        shorthand: ['يناير', 'فبراير', 'مارس', 'إبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+        long: ['يناير', 'فبراير', 'مارس', 'إبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    },
+    buttonText: { today: 'اليوم', month: 'شهر', week: 'أسبوع', day: 'يوم', list: 'قائمة', prev: 'السابق', next: 'التالي' },
+    titleFormats: { month: 'MMMM YYYY', week: 'D MMM YYYY', day: 'dddd D MMMM YYYY', list: 'D MMM YYYY' },
+    moreLinkText: (n) => `${n}+ أكثر`,
+    noEventsText: 'لا توجد أحداث في هذا النطاق',
+    timeFormat: 'HH:mm',
+};
+const jaLocale = {
+    code: 'ja',
+    direction: 'ltr',
+    weekdays: {
+        shorthand: ['日', '月', '火', '水', '木', '金', '土'],
+        long: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
+    },
+    months: {
+        shorthand: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        long: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+    },
+    buttonText: { today: '今日', month: '月', week: '週', day: '日', list: 'リスト', prev: '前へ', next: '次へ' },
+    titleFormats: { month: 'YYYY年M月', week: 'YYYY年M月D日', day: 'YYYY年M月D日(ddd)', list: 'YYYY年M月D日' },
+    moreLinkText: (n) => `他${n}件`,
+    noEventsText: 'この範囲にイベントはありません',
+    timeFormat: 'HH:mm',
+};
+const koLocale = {
+    code: 'ko',
+    direction: 'ltr',
+    weekdays: {
+        shorthand: ['일', '월', '화', '수', '목', '금', '토'],
+        long: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+    },
+    months: {
+        shorthand: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        long: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    },
+    buttonText: { today: '오늘', month: '월', week: '주', day: '일', list: '목록', prev: '이전', next: '다음' },
+    titleFormats: { month: 'YYYY년 M월', week: 'YYYY년 M월 D일', day: 'YYYY년 M월 D일 dddd', list: 'YYYY년 M월 D일' },
+    moreLinkText: (n) => `+${n} 더보기`,
+    noEventsText: '이 범위에 이벤트가 없습니다',
+    timeFormat: 'HH:mm',
+};
+const locales = new Map();
+export function registerLocale(code, locale) {
+    locales.set(code, locale);
+}
+export function getLocale(code) {
+    return locales.get(code) ?? enLocale;
+}
+export function getAvailableLocales() {
+    return Array.from(locales.keys());
+}
+registerLocale('en', enLocale);
+registerLocale('es', esLocale);
+registerLocale('fr', frLocale);
+registerLocale('de', deLocale);
+registerLocale('pt', ptLocale);
+registerLocale('it', itLocale);
+registerLocale('zh', zhLocale);
+registerLocale('ar', arLocale);
+registerLocale('ja', jaLocale);
+registerLocale('ko', koLocale);
+//# sourceMappingURL=locale-manager.js.map

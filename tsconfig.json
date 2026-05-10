@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "bundler",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "useDefineForClassFields": false,
+    "declaration": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "moduleDetection": "force",
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": true,
+    "ignoreDeprecations": "5.0",
+    "paths": {
+      "@nexa-calendar/core": ["./packages/core/src/index.ts"],
+      "@nexa-calendar/ui": ["./packages/ui/src/index.ts"],
+      "@nexa-calendar/vue": ["./packages/vue/src/index.ts"],
+      "@nexa-calendar/angular": ["./packages/angular/src/index.ts"],
+      "@nexa-calendar/svelte": ["./packages/svelte/src/index.ts"],
+      "@nexa-calendar/react": ["./packages/react/src/index.ts"]
+    }
+  },
+  "include": ["packages/core/**/*", "packages/ui/**/*", "packages/vue/**/*", "packages/angular/**/*", "packages/svelte/**/*", "packages/react/**/*", "apps/**/*"],
+  "exclude": ["**/dist", "**/node_modules"]
+}

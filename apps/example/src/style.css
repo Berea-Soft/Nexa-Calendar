@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  /* Nexa-Calendar custom properties */
+  --nx-bg: #ffffff;
+  --nx-surface: #ffffff;
+  --nx-surface-alt: #f9fafb;
+  --nx-border: #e5e7eb;
+  --nx-border-light: #f3f4f6;
+  --nx-text: #111827;
+  --nx-text-muted: #6b7280;
+  --nx-text-faint: #9ca3af;
+  --nx-accent: #3b82f6;
+  --nx-accent-hover: #2563eb;
+  --nx-accent-text: #ffffff;
+  --nx-today-bg: #eff6ff;
+  --nx-today-ring: #3b82f6;
+  --nx-weekend-bg: #fafafa;
+  --nx-header-bg: #f9fafb;
+  --nx-header-text: #374151;
+  --nx-hover: #f3f4f6;
+  --nx-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);
+  --nx-radius: 0.75rem;
+
+  /* Additional Tailwind 4 theme extensions if needed */
+  --font-plus-jakarta: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+}
+
+/* Global resets and base styles */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: var(--font-plus-jakarta);
+    background-color: #020617;
+    color: #f1f5f9;
+  }
+
+  #app {
+    min-height: 100vh;
+  }
+}
+
+/* Custom element styles for Lit web components */
+nx-calendar {
+  display: block;
+}

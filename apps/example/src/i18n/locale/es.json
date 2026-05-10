@@ -1,0 +1,174 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "demo": "Demo",
+    "demos2": "Demos Interactivos",
+    "docs": "Docs",
+    "features": "Características",
+    "support": "Soporte"
+  },
+  "home": {
+    "title": "El Calendario Moderno",
+    "subtitle": "Una alternativa a FullCalendar construida con Web Components",
+    "cta": "Probar Demo",
+    "github": "Star en GitHub",
+    "features_title": "Todo lo que necesitas",
+    "frameworks_title": "Tu Framework, Tu Elección",
+    "install_title": "Instalación Rápida",
+    "stats": {
+      "frameworks": "Frameworks",
+      "views": "Tipos de Vista",
+      "locales": "Locales",
+      "typescript": "TypeScript"
+    },
+    "features": {
+      "views": {
+        "title": "8 Tipos de Vista",
+        "desc": "Mes, Semana, Semana Laboral, Día, Lista, Timeline, Resource Timeline, Año"
+      },
+      "dnd": {
+        "title": "Arrastrar y Soltar",
+        "desc": "Mueve y redimensiona eventos sin problemas"
+      },
+      "locales": {
+        "title": "40+ Locales",
+        "desc": "Soporte completo de internacionalización"
+      },
+      "timezones": {
+        "title": "Zonas Horarias",
+        "desc": "Gestiona eventos en diferentes zonas horarias"
+      },
+      "frameworks": {
+        "title": "6 Frameworks",
+        "desc": "React, Vue, Angular, Svelte y más"
+      },
+      "themes": {
+        "title": "7 Temas",
+        "desc": "Claro, Oscuro, Océano, Rosa y más"
+      }
+    }
+  },
+  "demo": {
+    "sidebar": {
+      "config": "Configuración",
+      "theme": "Tema",
+      "language": "Idioma",
+      "view": "Tipo de Vista",
+      "example": "Conjunto de Datos",
+      "framework": "Framework Wrapper",
+      "timezone": "Zona Horaria",
+      "eventLimit": "Límite de Eventos",
+      "businessHours": "Horas Laborales",
+      "bizConfig": "Conf. de Horas",
+      "bizStart": "Hora de Inicio",
+      "bizEnd": "Hora de Fin",
+      "bizDays": "Días Laborales",
+      "showWeekends": "Mostrar Fines de Semana",
+      "editable": "Editable (D&D)",
+      "slotDuration": "Duración de Slot (min)",
+      "hourHeight": "Altura de Hora (px)",
+      "minTime": "Hora Mínima",
+      "maxTime": "Hora Máxima",
+      "addEvent": "Añadir Evento Aleatorio",
+      "options": "Opciones",
+      "timeFormat": "Formato de Hora",
+      "selectDays": "Seleccionar Días",
+      "customHours": "Horas Personalizadas",
+      "maxEvents": "Eventos Máx",
+      "to": "a",
+      "start": "Inicio",
+      "end": "Fin"
+    },
+    "examples": {
+      "full": { "title": "Características Completas", "desc": "Eventos, horas laborales, DnD, i18n" },
+      "business": { "title": "Horas Laborales", "desc": "9AM–6PM Lun–Vie, vista semana laboral" },
+      "minimal": { "title": "Mínimo / Solo Lectura", "desc": "Calendario simple, sin arrastrar" },
+      "noweekends": { "title": "Sin Fines de Semana", "desc": "Solo Lun–Vie, ocultos no actuales" },
+      "eventlimit": { "title": "Límite de Eventos (3)", "desc": "Máx 3 por día, popover 'más'" },
+      "timeline": { "title": "Vista Timeline", "desc": "Barras horizontales entre días" },
+      "resource-timeline": { "title": "Resource Timeline", "desc": "Filas por recurso, columna fija" },
+      "year": { "title": "Vista Anual", "desc": "12 mini-meses, puntos de evento" },
+      "drag-drop": { "title": "Arrastrar y Soltar", "desc": "Mover y redimensionar eventos" },
+      "background-events": { "title": "Eventos de Fondo", "desc": "Eventos como barras detrás" },
+      "selectable": { "title": "Fechas Seleccionables", "desc": "Click para crear eventos" },
+      "locales": { "title": "Internacionalización", "desc": "10+ idiomas soportados" },
+      "theming": { "title": "Temas", "desc": "7 integrados + personalizados" },
+      "timezones": { "title": "Zonas Horarias", "desc": "Eventos con zona horaria" }
+    },
+    "biz_configs": {
+      "default": "Predeterminado (Lun-Vie 9AM-6PM)",
+      "extended": "Extendido (Lun-Sáb 7AM-9PM)",
+      "morning": "Turno Mañana (6AM-2PM)",
+      "afternoon": "Turno Tarde (12PM-8PM)",
+      "nightShift": "Turno Noche (10PM-6AM)",
+      "split": "Partido (9-12 y 14-18)",
+      "weekend": "Solo Finde (10AM-4PM)",
+      "custom": "Personalizado"
+    }
+  },
+  "docs": {
+    "title": "Documentación",
+    "interactive": "Ejemplos Interactivos",
+    "sandbox": "Abrir en CodeSandbox",
+    "gettingStarted": "Primeros Pasos",
+    "installation": "Instalación",
+    "api": "Referencia API",
+    "viewTypes": "Tipos de Vista",
+    "eventObject": "Objeto de Evento",
+    "api_desc": {
+      "view": "Tipo de vista actual (mes, semana, día, etc.)",
+      "events": "Array de eventos del calendario",
+      "locale": "Código de locale (en, es, fr, etc.)",
+      "theme": "Nombre del tema (light, dark, ocean, etc.)",
+      "biz": "Configuración de horas laborales",
+      "editable": "Activar arrastrar y soltar eventos"
+    }
+  },
+  "features": {
+    "title": "Características y Roadmap",
+    "subtitle": "Características actuales y próximas mejoras",
+    "current": "Características Actuales",
+    "upcoming": "Próximas Características",
+    "list": {
+      "views": "8 Tipos de Vista",
+      "views_desc": "Mes, Semana, Semana Laboral, Día, Lista, Timeline, Resource Timeline, Año",
+      "dnd": "Arrastrar y Soltar",
+      "dnd_desc": "Mueve y redimensiona eventos",
+      "locales": "40+ Locales",
+      "locales_desc": "Soporte completo i18n",
+      "tz": "Soporte de Zonas Horarias",
+      "tz_desc": "Gestiona eventos en diferentes zonas horarias",
+      "frameworks": "6 Wrappers de Framework",
+      "frameworks_desc": "React, Vue, Angular, Svelte, Web Components, Vanilla",
+      "themes": "7 Temas Integrados",
+      "themes_desc": "Claro, Oscuro, Océano, Rosa, Slate, Bosque, Ámbar",
+      "biz": "Horas Laborales",
+      "biz_desc": "Visualización de horas de trabajo configurable",
+      "custom": "Contenido de Evento Personalizado",
+      "custom_desc": "Plantillas personalizadas para eventos"
+    },
+    "roadmap": {
+      "email": "Notificaciones por Email",
+      "email_desc": "Recordatorios de eventos por email",
+      "sync": "Sincronización con Google Calendar",
+      "sync_desc": "Sincronización bidireccional con Google Calendar",
+      "mobile": "Vistas Optimizadas para Móvil",
+      "mobile_desc": "Vistas de calendario optimizadas para táctil",
+      "ai": "Sugerencias de Eventos por IA",
+      "ai_desc": "Asistencia de programación inteligente",
+      "stats": "Panel de Analíticas",
+      "stats_desc": "Información sobre el uso del calendario",
+      "ical": "Importación/Exportación iCal",
+      "ical_desc": "Soporte de archivos de calendario estándar"
+    }
+  },
+  "support": {
+    "title": "Soporte y Contribuir",
+    "subtitle": "Ayúdanos a mantener vivo este proyecto",
+    "donate": "Donar",
+    "buyCoffee": "Comprar un Café",
+    "ghSponsors": "Sponsors de GitHub",
+    "patreon": "Patreon",
+    "contribute": "Contribuir"
+  }
+}

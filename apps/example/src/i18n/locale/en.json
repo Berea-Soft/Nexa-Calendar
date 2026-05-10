@@ -1,0 +1,174 @@
+{
+  "nav": {
+    "home": "Home",
+    "demo": "Demo",
+    "demos2": "Interactive Demos",
+    "docs": "Docs",
+    "features": "Features",
+    "support": "Support"
+  },
+  "home": {
+    "title": "The Modern Calendar",
+    "subtitle": "A FullCalendar alternative built with Web Components",
+    "cta": "Try Demo",
+    "github": "Star on GitHub",
+    "features_title": "Everything you need",
+    "frameworks_title": "Your Framework, Your Choice",
+    "install_title": "Quick Install",
+    "stats": {
+      "frameworks": "Frameworks",
+      "views": "View Types",
+      "locales": "Locales",
+      "typescript": "TypeScript"
+    },
+    "features": {
+      "views": {
+        "title": "8 View Types",
+        "desc": "Month, Week, Work Week, Day, List, Timeline, Resource Timeline, Year"
+      },
+      "dnd": {
+        "title": "Drag & Drop",
+        "desc": "Move and resize events seamlessly"
+      },
+      "locales": {
+        "title": "40+ Locales",
+        "desc": "Full internationalization support"
+      },
+      "timezones": {
+        "title": "Timezones",
+        "desc": "Handle events across timezones"
+      },
+      "frameworks": {
+        "title": "6 Frameworks",
+        "desc": "React, Vue, Angular, Svelte & more"
+      },
+      "themes": {
+        "title": "7 Themes",
+        "desc": "Light, Dark, Ocean, Rose & more"
+      }
+    }
+  },
+  "demo": {
+    "sidebar": {
+      "config": "Configuration",
+      "theme": "Theme",
+      "language": "Language",
+      "view": "View Type",
+      "example": "Data Set",
+      "framework": "Framework Wrapper",
+      "timezone": "Timezone",
+      "eventLimit": "Event Limit",
+      "businessHours": "Business Hours",
+      "bizConfig": "Hours Config",
+      "bizStart": "Start Time",
+      "bizEnd": "End Time",
+      "bizDays": "Working Days",
+      "showWeekends": "Show Weekends",
+      "editable": "Editable (D&D)",
+      "slotDuration": "Slot Duration (min)",
+      "hourHeight": "Hour Height (px)",
+      "minTime": "Min Time",
+      "maxTime": "Max Time",
+      "addEvent": "Add Random Event",
+      "options": "Options",
+      "timeFormat": "Time Format",
+      "selectDays": "Select Days",
+      "customHours": "Custom Hours",
+      "maxEvents": "Max Events",
+      "to": "to",
+      "start": "Start",
+      "end": "End"
+    },
+    "examples": {
+      "full": { "title": "Full Features", "desc": "All events, business hours, DnD, i18n" },
+      "business": { "title": "Business Hours", "desc": "9AM–6PM Mon–Fri, work week view" },
+      "minimal": { "title": "Minimal / Read-only", "desc": "Plain calendar, no drag, no limits" },
+      "noweekends": { "title": "No Weekends", "desc": "Mon–Fri only, non-current hidden" },
+      "eventlimit": { "title": "Event Limit (3)", "desc": "Max 3 per day, 'more' popover" },
+      "timeline": { "title": "Timeline View", "desc": "Horizontal event bars across days" },
+      "resource-timeline": { "title": "Resource Timeline", "desc": "Per-resource rows, frozen column" },
+      "year": { "title": "Year View", "desc": "12 mini-months, event dots" },
+      "drag-drop": { "title": "Drag & Drop", "desc": "Move and resize events" },
+      "background-events": { "title": "Background Events", "desc": "Events shown as bars behind" },
+      "selectable": { "title": "Selectable Dates", "desc": "Click dates to create events" },
+      "locales": { "title": "Internationalization", "desc": "10+ languages supported" },
+      "theming": { "title": "Theming", "desc": "7 built-in + custom themes" },
+      "timezones": { "title": "Timezones", "desc": "Timezone-aware events" }
+    },
+    "biz_configs": {
+      "default": "Default (Mon-Fri 9AM-6PM)",
+      "extended": "Extended (Mon-Sat 7AM-9PM)",
+      "morning": "Morning Shift (6AM-2PM)",
+      "afternoon": "Afternoon Shift (12PM-8PM)",
+      "nightShift": "Night Shift (10PM-6AM)",
+      "split": "Split (9-12 & 14-18)",
+      "weekend": "Weekend Only (10AM-4PM)",
+      "custom": "Custom"
+    }
+  },
+  "docs": {
+    "title": "Documentation",
+    "interactive": "Interactive Examples",
+    "sandbox": "Open in CodeSandbox",
+    "gettingStarted": "Getting Started",
+    "installation": "Installation",
+    "api": "API Reference",
+    "viewTypes": "View Types",
+    "eventObject": "Event Object",
+    "api_desc": {
+      "view": "Current view type (month, week, day, etc.)",
+      "events": "Array of calendar events",
+      "locale": "Locale code (en, es, fr, etc.)",
+      "theme": "Theme name (light, dark, ocean, etc.)",
+      "biz": "Business hours configuration",
+      "editable": "Enable event drag & drop"
+    }
+  },
+  "features": {
+    "title": "Features & Roadmap",
+    "subtitle": "Current features and upcoming improvements",
+    "current": "Current Features",
+    "upcoming": "Upcoming Features",
+    "list": {
+      "views": "8 View Types",
+      "views_desc": "Month, Week, Work Week, Day, List, Timeline, Resource Timeline, Year",
+      "dnd": "Drag & Drop",
+      "dnd_desc": "Move and resize events",
+      "locales": "40+ Locales",
+      "locales_desc": "Full i18n support",
+      "tz": "Timezone Support",
+      "tz_desc": "Handle events across timezones",
+      "frameworks": "6 Framework Wrappers",
+      "frameworks_desc": "React, Vue, Angular, Svelte, Web Components, Vanilla",
+      "themes": "7 Built-in Themes",
+      "themes_desc": "Light, Dark, Ocean, Rose, Slate, Forest, Amber",
+      "biz": "Business Hours",
+      "biz_desc": "Configurable work hours display",
+      "custom": "Custom Event Content",
+      "custom_desc": "Custom templates for events"
+    },
+    "roadmap": {
+      "email": "Email Notifications",
+      "email_desc": "Event reminders via email",
+      "sync": "Google Calendar Sync",
+      "sync_desc": "Two-way sync with Google Calendar",
+      "mobile": "Mobile Optimized Views",
+      "mobile_desc": "Touch-optimized calendar views",
+      "ai": "AI Event Suggestions",
+      "ai_desc": "Smart scheduling assistance",
+      "stats": "Analytics Dashboard",
+      "stats_desc": "Calendar usage insights",
+      "ical": "iCal Import/Export",
+      "ical_desc": "Standard calendar file support"
+    }
+  },
+  "support": {
+    "title": "Support & Contribute",
+    "subtitle": "Help us keep this project alive",
+    "donate": "Donate",
+    "buyCoffee": "Buy a Coffee",
+    "ghSponsors": "GitHub Sponsors",
+    "patreon": "Patreon",
+    "contribute": "Contribute"
+  }
+}
