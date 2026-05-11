@@ -71,6 +71,6 @@ jobs:
       - name: Deploy to Vercel
         run: |
           npm i -g vercel@latest
-          vercel --prod -t $VERCEL_TOKEN
+          vercel --prod --yes -t $VERCEL_TOKEN
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
