@@ -14,13 +14,21 @@
     "lint": "prettier --check .",
     "format": "prettier --write .",
     "commitlint": "commitlint --edit",
-    "prepare": "pnpm install -h"
+    "prepare": "pnpm install -h",
+    "release": "semantic-release",
+    "ci": "pnpm test && pnpm format && pnpm lint && pnpm build && pnpm -r build"
   },
   "dependencies": {
     "@bereasoftware/time-guard": "latest",
     "lit": "^3.0.0"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.6",
+    "@semantic-release/release-notes-generator": "^14.1.1",
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
     "@tailwindcss/vite": "^4.3.0",
     "@types/node": "^25.6.2",
@@ -32,8 +40,10 @@
     "prettier": "^3.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "semantic-release": "^25.0.3",
     "svelte": "^4.2.0",
     "tailwindcss": "^4.3.0",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vite": "^8.0.11",
     "vite-plugin-vue-devtools": "^8.1.2",

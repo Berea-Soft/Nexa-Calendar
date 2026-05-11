@@ -45,6 +45,7 @@ jobs:
     permissions:
       contents: write
       id-token: write
+      packages: write
 
     steps:
       - uses: actions/checkout@v4
@@ -71,58 +72,44 @@ jobs:
       - name: Build all packages
         run: pnpm -r build
 
-      - name: Get next version
-        id: version
-        run: |
-          git fetch --tags
-          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          CURRENT="${LAST_TAG#v}"
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
-          MAJOR=$((MAJOR))
-          MINOR=$((MINOR + 1))
-          PATCH=0
-          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
-          echo "VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
-          echo "Last tag: $LAST_TAG"
-          echo "New version: $NEW_VERSION"
-
-      - name: Update versions
-        run: |
-          for pkg in packages/core packages/ui packages/react packages/vue packages/angular packages/svelte; do
-            cd $pkg
-            npm version ${{ steps.version.outputs.VERSION }} --no-git-tag-version
-            cd ../..
-          done
+      - name: Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm release
 
       - name: Publish core to NPM
         working-directory: packages/core
         run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish UI to NPM
         working-directory: packages/ui
         run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish React to NPM
         working-directory: packages/react
         run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Vue to NPM
         working-directory: packages/vue
         run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Angular to NPM
         working-directory: packages/angular
         run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Svelte to NPM
         working-directory: packages/svelte
         run: npm publish --access public
-
-      - name: Create Git Tag
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "chore: release v${{ steps.version.outputs.VERSION }}"
-          git tag "v${{ steps.version.outputs.VERSION }}"
-          git push origin main --tags
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
