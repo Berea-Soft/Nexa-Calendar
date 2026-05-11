@@ -35,8 +35,8 @@ jobs:
 
       - name: Deploy to Vercel Preview
         if: github.event_name == 'pull_request'
-        run: vercel deploy apps/example/dist --token ${{ secrets.VERCEL_TOKEN }} --yes --prod --archive=tar
+        run: vercel deploy apps/example/dist --token ${{ secrets.VERCEL_TOKEN }} --yes --prod
 
       - name: Deploy to Vercel Production
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: vercel deploy apps/example/dist --token ${{ secrets.VERCEL_TOKEN }} --yes --prod --archive=tar
+        run: vercel deploy apps/example/dist --token ${{ secrets.VERCEL_TOKEN }} --yes --prod
