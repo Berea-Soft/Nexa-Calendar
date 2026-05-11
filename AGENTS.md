@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Full-featured calendar library (FullCalendar alternative) with Web Component (Lit 3) + React wrappers. pnpm monorepo.
+Full-featured calendar library with Web Component (Lit 3) + React wrappers. pnpm monorepo.
 
 ## Tech Stack
 

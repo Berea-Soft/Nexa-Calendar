@@ -14,7 +14,7 @@ if (!version) {
 
 const packages = ['core', 'ui', 'react', 'vue', 'angular', 'svelte'];
 
-packages.forEach((pkg) => {
+packages.forEach(pkg => {
   const pkgPath = path.join(__dirname, '..', 'packages', pkg, 'package.json');
   const pkgJson = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
   pkgJson.version = version;

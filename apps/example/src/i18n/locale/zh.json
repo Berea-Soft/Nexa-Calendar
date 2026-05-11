@@ -8,7 +8,7 @@
   },
   "home": {
     "title": "现代日历",
-    "subtitle": "基于 Web Components 构建的 FullCalendar 替代品",
+    "subtitle": "基于 Web Components 构建的日历库",
     "cta": "试用演示",
     "github": "在 GitHub 上 Star"
   },

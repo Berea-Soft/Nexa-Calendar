@@ -9,7 +9,7 @@
   },
   "home": {
     "title": "El Calendario Moderno",
-    "subtitle": "Una alternativa a FullCalendar construida con Web Components",
+    "subtitle": "Una biblioteca de calendario construida con Web Components",
     "cta": "Probar Demo",
     "github": "Star en GitHub",
     "features_title": "Todo lo que necesitas",

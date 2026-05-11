@@ -3,7 +3,7 @@
 
 # Nexa-Calendar
 
-A FullCalendar alternative built with modern web standards. Full-featured calendar library with Web Component (Lit 3) + React, Vue, Angular, and Svelte wrappers.
+A Full-featured calendar library built with Web Components (Lit 3) and React, Vue, Angular, and Svelte wrappers.
 
 [![npm version](https://img.shields.io/npm/v/@nexa-calendar/core.svg)](https://www.npmjs.com/package/@nexa-calendar/core)
 [![License](https://img.shields.io/npm/l/@nexa-calendar/core.svg)](LICENSE)
@@ -287,7 +287,7 @@ MIT License - see [LICENSE](./LICENSE) for details.
 
 - [TimeGuard](https://github.com/bereasoftware/time-guard) - Date handling with 40+ locales
 - [Lit](https://lit.dev/) - Web Component framework
-- [FullCalendar](https://fullcalendar.io/) - Inspiration for calendar functionality
+- [FullCalendar](https://fullcalendar.io/)
 
 ---
 
