@@ -178,9 +178,9 @@ const sandpackTemplate = computed(() => {
 
 const customSetup = computed(() => ({
   dependencies: {
-    '@nexa-calendar/vue': 'unpkg',
-    '@nexa-calendar/react': 'unpkg',
-    '@nexa-calendar/ui': 'unpkg',
+    '@nexa-calendar/vue': 'latest',
+    '@nexa-calendar/react': 'latest',
+    '@nexa-calendar/ui': 'latest',
     lit: '^3.0.0',
   },
 }));

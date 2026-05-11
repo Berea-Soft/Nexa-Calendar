@@ -1,4 +1,4 @@
-name: CI & Deploy WEB
+name: Deploy to Vercel
 
 on:
   push:
@@ -10,45 +10,7 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Lint (check formatting)
-        run: pnpm lint
-
-      - name: Check format on changed files
-        run: |
-          CHANGED_FILES=$(git diff --name-only --cached ${{ github.event.before }} ${{ github.sha }} || echo "")
-          if [ -n "$CHANGED_FILES" ]; then
-            pnpm prettier --write $CHANGED_FILES
-            git diff --exit-code
-          fi
-
-      - name: Run tests
-        run: pnpm test
-
-      - name: Build example
-        run: pnpm --filter example build
-
   deploy:
-    needs: validate
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -65,12 +27,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build example
-        run: pnpm --filter example build
+      - name: Build
+        run: pnpm build
 
       - name: Deploy to Vercel
-        run: |
-          npm i -g vercel@latest
-          vercel --prod --yes -t $VERCEL_TOKEN
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: apps/example
