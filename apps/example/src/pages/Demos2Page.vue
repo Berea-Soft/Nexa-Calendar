@@ -65,9 +65,9 @@
             :key="`${selectedFramework}-${selectedExample}`"
             :template="sandpackTemplate"
             :files="currentFiles"
-            :custom-setup="customSetup"
+            :customSetup="customSetup"
             :options="sandpackOptions"
-            :theme="sandpackTheme"
+            theme="dark"
           />
         </div>
       </div>
@@ -77,7 +77,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { Sandpack } from '@codesandbox/sandpack-react';
+import { Sandpack } from 'sandpack-vue3';
 
 type FrameworkKey = 'vue' | 'react' | 'svelte';
 
@@ -171,16 +171,16 @@ const sandpackTemplate = computed(() => {
     ? 'vue3'
     : selectedFramework.value === 'react'
       ? 'react'
-      : 'svelte';
+      : selectedFramework.value === 'svelte'
+        ? 'svelte'
+        : 'angular';
 });
 
 const customSetup = computed(() => ({
   dependencies: {
-    '@nexa-calendar/vue': 'latest',
-    '@nexa-calendar/react': 'latest',
-    '@nexa-calendar/ui': 'latest',
-    '@nexa-calendar/core': 'latest',
-    '@bereasoftware/time-guard': 'latest',
+    '@nexa-calendar/vue': 'unpkg',
+    '@nexa-calendar/react': 'unpkg',
+    '@nexa-calendar/ui': 'unpkg',
     lit: '^3.0.0',
   },
 }));
@@ -193,25 +193,8 @@ const sandpackOptions = {
   wrapContent: false,
   closableTabs: false,
   editorHeight: 700,
-};
-
-const sandpackTheme = {
-  colors: {
-    surface1: '#0f172a',
-    surface2: '#1e293b',
-    surface3: '#334155',
-    disabled: '#475569',
-    base: '#e2e8f0',
-    clickable: '#94a3b8',
-    hover: '#cbd5e1',
-    active: '#f1f5f9',
-    error: '#fca5a5',
-    errorSurface: '#7f1d1d',
-    warning: '#fcd34d',
-    warningSurface: '#78350f',
-  },
-  syntax: {},
-  font: {},
+  recompileMode: 'delayed' as const,
+  recompileDelay: 500,
 };
 
 const vueExamples: Record<string, Record<string, string>> = {
