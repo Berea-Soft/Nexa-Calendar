@@ -1,9 +1,0 @@
-{
-  "framework": "vite",
-  "buildCommand": "echo 'Build already done locally'",
-  "installCommand": "echo 'Dependencies already installed locally'",
-  "outputDirectory": "dist",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
-}
