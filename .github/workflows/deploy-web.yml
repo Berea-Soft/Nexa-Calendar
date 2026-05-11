@@ -35,8 +35,8 @@ jobs:
 
       - name: Deploy to Vercel Preview
         if: github.event_name == 'pull_request'
-        run: vercel --token ${{ secrets.VERCEL_TOKEN }} --yes --prebuilt --prod --cwd apps/example
+        run: vercel --token ${{ secrets.VERCEL_TOKEN }} --yes --prod --cwd apps/example
 
       - name: Deploy to Vercel Production
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: vercel --token ${{ secrets.VERCEL_TOKEN }} --yes --prebuilt --prod --cwd apps/example
+        run: vercel --token ${{ secrets.VERCEL_TOKEN }} --yes --prod --cwd apps/example
