@@ -24,12 +24,28 @@ export class NxMonthView extends LitElement {
     const maxEvents =
       this.dayMaxEvents === true ? Infinity : (this.dayMaxEvents as number) || Infinity;
 
-    return html` <div class="grid grid-cols-7" style="gap: 1px; background: var(--nx-border);">
+    return html` <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--nx-border);
+      "
+    >
       ${weekdays.map(
         d => html`
           <div
-            style="background: var(--nx-header-bg); color: var(--nx-text-muted);"
-            class="px-3 py-2 text-center text-xs font-semibold uppercase tracking-wider"
+            style="
+              background: var(--nx-header-bg);
+              color: var(--nx-text-muted);
+              padding: 8px 12px;
+              text-align: center;
+              font-size: 0.75rem;
+              font-weight: 600;
+              text-transform: uppercase;
+              letter-spacing: 0.04em;
+              line-height: 1.1;
+            "
           >
             ${d}
           </div>
@@ -141,7 +157,7 @@ export class NxMonthView extends LitElement {
         style="max-height: 180px; overflow-y: auto; padding: 6px; display: flex; flex-direction: column; gap: 3px;"
       >
         ${cell.events.map(
-          e => html`
+          (e: any) => html`
             <div
               style="${e.display === 'background'
                 ? `background: color-mix(in srgb, ${e.backgroundColor ?? 'var(--nx-accent)'} 15%, transparent); border-left: 3px solid ${e.backgroundColor ?? 'var(--nx-accent)'}; color: var(--nx-text-muted);`

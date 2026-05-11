@@ -4,7 +4,11 @@
     "noEmit": false,
     "outDir": "./dist",
     "declaration": true,
-    "declarationDir": "./dist"
+    "declarationDir": "./dist",
+    "sourceMap": false,
+    "inlineSourceMap": false,
+    "inlineSources": false
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules"]
 }
