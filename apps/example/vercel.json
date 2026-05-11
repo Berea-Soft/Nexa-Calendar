@@ -1,7 +1,6 @@
 {
-  "skipBuild": true,
-  "buildCommand": "echo 'Build skipped'",
-  "outputDirectory": "dist",
-  "framework": null,
-  "installCommand": "echo 'Install skipped'"
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
