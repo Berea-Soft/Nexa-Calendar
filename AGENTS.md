@@ -9,8 +9,8 @@ Full-featured calendar library (FullCalendar alternative) with Web Component (Li
 - **Runtime**: TypeScript 5.9 (strict), ESNext
 - **Dates**: `@bereasoftware/time-guard` — 40+ locales, NO native `Date`
 - **UI**: Lit 3 (Web Components)
-- **Styles**: Tailwind CSS 3 (CDN)
-- **Build**: Vite 5
+- **Styles**: Tailwind CSS 4 (CSS-first config)
+- **Build**: Vite 8
 - **React**: `@lit-labs/react` wrapper
 - **Package Mgr**: pnpm workspaces
 - **Tests**: Vitest (22+ tests)
@@ -23,9 +23,28 @@ nexa-calendar/
     core/     — Domain logic, types, services (zero UI deps)
     ui/       — Lit web components, Tailwind views
     react/    — React wrapper (@lit-labs/react)
+    vue/      — Vue 3 wrapper
+    angular/  — Angular wrapper
+    svelte/   — Svelte wrapper
   apps/
-    example/  — Demo app
+    example/  — Demo app with Sandpack
 ```
+
+## NPM Publishing
+
+All packages published to `@nexa-calendar` scope (e.g., `@nexa-calendar/core`, `@nexa-calendar/ui`, etc.)
+
+CI workflow: `.github/workflows/publish-npm.yml`
+
+- Validates (lint, test, build)
+- On push to main: bumps minor version, publishes all packages, creates git tag
+
+## Vercel Deployment
+
+Example app deployed via `.github/workflows/deploy-example.yml`
+
+- Uses `vercel@latest` CLI
+- Node 22, pnpm
 
 ## Conventions
 
@@ -34,6 +53,7 @@ nexa-calendar/
 - `strict: true`, `useDefineForClassFields: false`, `experimentalDecorators: true`
 - Interfaces prefixed with `I` (e.g., `IEventSource`)
 - All public API fully typed, barrel exports from `index.ts`
+- NO `rootDir` in package tsconfigs (build outputs to dist/)
 
 ### TimeGuard (Date Handling)
 
@@ -79,3 +99,9 @@ nexa-calendar/
 - `pnpm dev` — Run example app
 - `pnpm test` — Run vitest
 - `pnpm typecheck` — `tsc --noEmit`
+- `pnpm build` — Build example app
+
+### .gitignore
+
+- `dist/`, `*.js`, `*.d.ts`, `*.js.map` (generated files)
+- `node_modules/`, `*.local`

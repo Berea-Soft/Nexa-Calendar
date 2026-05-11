@@ -16,19 +16,6 @@
     "commitlint": "commitlint --edit",
     "prepare": "pnpm install -h"
   },
-  "release": {
-    "branches": [
-      "main"
-    ],
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      "@semantic-release/git",
-      "@semantic-release/github"
-    ]
-  },
   "dependencies": {
     "@bereasoftware/time-guard": "latest",
     "lit": "^3.0.0"
