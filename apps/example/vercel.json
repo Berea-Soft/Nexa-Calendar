@@ -1,0 +1,6 @@
+{
+  "buildCommand": "echo 'Build skipped - already done'",
+  "outputDirectory": "dist",
+  "framework": null,
+  "installCommand": "echo 'Install skipped'"
+}
