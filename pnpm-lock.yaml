@@ -75,23 +75,26 @@ importers:
         specifier: ^2.20.0
         version: 2.20.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nexa-calendar/angular':
-        specifier: workspace:*
-        version: link:../../packages/angular
+        specifier: latest
+        version: 0.1.0(@angular/common@21.2.12(@angular/core@21.2.12(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.12(rxjs@7.8.2))
       '@nexa-calendar/core':
-        specifier: workspace:*
-        version: link:../../packages/core
+        specifier: latest
+        version: 0.1.0
       '@nexa-calendar/react':
-        specifier: workspace:*
-        version: link:../../packages/react
+        specifier: latest
+        version: 0.1.0(@types/react@18.3.28)(react@18.3.1)
       '@nexa-calendar/svelte':
-        specifier: workspace:*
-        version: link:../../packages/svelte
+        specifier: latest
+        version: 0.1.0(svelte@4.2.20)
       '@nexa-calendar/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
+        specifier: latest
+        version: 0.1.0
       '@nexa-calendar/vue':
-        specifier: workspace:*
-        version: link:../../packages/vue
+        specifier: latest
+        version: 0.1.0(vue@3.5.34(typescript@5.9.3))
+      '@vercel/speed-insights':
+        specifier: ^2.0.0
+        version: 2.0.0(react@18.3.1)(svelte@4.2.20)(vue-router@4.6.4(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))
       '@vitejs/plugin-vue':
         specifier: ^6.0.6
         version: 6.0.6(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0))(vue@3.5.34(typescript@5.9.3))
@@ -176,8 +179,8 @@ importers:
   packages/ui:
     dependencies:
       '@nexa-calendar/core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: latest
+        version: 0.1.0
       lit:
         specifier: ^3.0.0
         version: 3.3.2
@@ -906,6 +909,51 @@ packages:
       '@emnapi/core': ^1.7.1
       '@emnapi/runtime': ^1.7.1
 
+  '@nexa-calendar/angular@0.1.0':
+    resolution:
+      {
+        integrity: sha512-SxogrZFr9odSKF+NaADcPjmZtXC2V3xiWwppjbGAEU/x8jT/d3HpPjySq0l/ZDEO4c+mL9gfVTRxZgwwT+dRaw==,
+      }
+    peerDependencies:
+      '@angular/common': '>=17'
+      '@angular/core': '>=17'
+
+  '@nexa-calendar/core@0.1.0':
+    resolution:
+      {
+        integrity: sha512-SiKeMTQyrftZtvmKCc/7VOvQ6deLdNqij1ApqygpMvDmVYWyM2f7W6DxpyPx1HTbcRljBfRcKS6qroUWFl8H0w==,
+      }
+
+  '@nexa-calendar/react@0.1.0':
+    resolution:
+      {
+        integrity: sha512-Bup/90wMvWkdXNSSKJ0HqF/3yQDGLws5MxFCo1AWtFS7cdGfCS8sE20SuWoPx9wvFJndaR6QRI/TeXo61Hsiew==,
+      }
+    peerDependencies:
+      react: '>=18'
+
+  '@nexa-calendar/svelte@0.1.0':
+    resolution:
+      {
+        integrity: sha512-zTId2vifc1W2L+AXGWk0chLD7v6/5P1Aha9mJduOX/arlyXImlZcQHxnB2x7BUOXFFjMcS+2LfTPq5VHhQOBhQ==,
+      }
+    peerDependencies:
+      svelte: '>=4'
+
+  '@nexa-calendar/ui@0.1.0':
+    resolution:
+      {
+        integrity: sha512-OBiH+c2UomuoU7k6bULIZUaFNyE5ZRLsudOI0LuWCIx1pVITN8Q5eYczDlctH4yM6EYjsgb9JeTRkhKdJZODfA==,
+      }
+
+  '@nexa-calendar/vue@0.1.0':
+    resolution:
+      {
+        integrity: sha512-4xPBkdHcf3jQJX59xFT+O7R6MqQEX3UiKC+EDyXdAP/V1zf4jIlaPmOdE5j8IRLczawwp6EBScoxGw+/QSBwLw==,
+      }
+    peerDependencies:
+      vue: '>=3'
+
   '@open-draft/deferred-promise@2.2.0':
     resolution:
       {
@@ -1521,6 +1569,35 @@ packages:
       {
         integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==,
       }
+
+  '@vercel/speed-insights@2.0.0':
+    resolution:
+      {
+        integrity: sha512-jwkNcrTeafWxjmWq4AHBaptSqZiJkYU5adLC9QBSqeim0GcqDMgN5Ievh8OG1rJ6W3A4l1oiP7qr9CWxGuzu3w==,
+      }
+    peerDependencies:
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      nuxt: '>= 3'
+      react: ^18 || ^19 || ^19.0.0-rc
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      nuxt:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
 
   '@vitejs/plugin-vue@6.0.6':
     resolution:
@@ -3457,6 +3534,39 @@ snapshots:
       '@tybys/wasm-util': 0.10.2
     optional: true
 
+  '@nexa-calendar/angular@0.1.0(@angular/common@21.2.12(@angular/core@21.2.12(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.12(rxjs@7.8.2))':
+    dependencies:
+      '@angular/common': 21.2.12(@angular/core@21.2.12(rxjs@7.8.2))(rxjs@7.8.2)
+      '@angular/core': 21.2.12(rxjs@7.8.2)
+      '@nexa-calendar/ui': link:packages/ui
+
+  '@nexa-calendar/core@0.1.0':
+    dependencies:
+      '@bereasoftware/time-guard': 2.6.0
+
+  '@nexa-calendar/react@0.1.0(@types/react@18.3.28)(react@18.3.1)':
+    dependencies:
+      '@lit-labs/react': 2.1.3(@types/react@18.3.28)
+      '@nexa-calendar/ui': link:packages/ui
+      react: 18.3.1
+    transitivePeerDependencies:
+      - '@types/react'
+
+  '@nexa-calendar/svelte@0.1.0(svelte@4.2.20)':
+    dependencies:
+      '@nexa-calendar/ui': link:packages/ui
+      svelte: 4.2.20
+
+  '@nexa-calendar/ui@0.1.0':
+    dependencies:
+      '@nexa-calendar/core': link:packages/core
+      lit: 3.3.2
+
+  '@nexa-calendar/vue@0.1.0(vue@3.5.34(typescript@5.9.3))':
+    dependencies:
+      '@nexa-calendar/ui': link:packages/ui
+      vue: 3.5.34(typescript@5.9.3)
+
   '@open-draft/deferred-promise@2.2.0': {}
 
   '@oxc-project/types@0.128.0': {}
@@ -3712,6 +3822,13 @@ snapshots:
       csstype: 3.2.3
 
   '@types/trusted-types@2.0.7': {}
+
+  '@vercel/speed-insights@2.0.0(react@18.3.1)(svelte@4.2.20)(vue-router@4.6.4(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))':
+    optionalDependencies:
+      react: 18.3.1
+      svelte: 4.2.20
+      vue: 3.5.34(typescript@5.9.3)
+      vue-router: 4.6.4(vue@3.5.34(typescript@5.9.3))
 
   '@vitejs/plugin-vue@6.0.6(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0))(vue@3.5.34(typescript@5.9.3))':
     dependencies:

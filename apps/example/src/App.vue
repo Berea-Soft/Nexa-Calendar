@@ -62,12 +62,14 @@
 <script setup lang="ts">
 import { watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
+injectSpeedInsights();
 import { IconGithub } from './components/common/icons';
 import LangPicker from './components/LangPicker.vue';
 
 const { t, locale } = useI18n();
 
-// Persist language choice
 watch(locale, newLocale => {
   localStorage.setItem('nx-locale', newLocale);
 });

@@ -9,7 +9,7 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@nexa-calendar/core": "workspace:*",
+    "@nexa-calendar/core": "latest",
     "lit": "^3.0.0"
   }
 }

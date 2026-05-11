@@ -10,13 +10,22 @@ A FullCalendar alternative built with modern web standards. Full-featured calend
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9+-blue.svg)](https://www.typescriptlang.org/)
 [![Lit](https://img.shields.io/badge/Lit-3.0+-blue.svg)](https://lit.dev/)
 
-[![CI](https://github.com/nexa-calendar/nexa-calendar/actions/workflows/publish-npm.yml/badge.svg)](https://github.com/nexa-calendar/nexa-calendar/actions)
-[![Coverage](https://img.shields.io/codecov/c/github/nexa-calendar/nexa-calendar.svg)](https://codecov.io/gh/nexa-calendar/nexa-calendar)
-[![Bundle Size](https://img.shields.io/bundlejs/size/@nexa-calendar/ui)](https://bundlejs.com/?q=@nexa-calendar/ui)
-
-[Demo](https://nexa-calendar.vercel.app) · [Documentation](#) · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md)
+[Demo](https://nexa-calendar.vercel.app) · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md)
 
 </div>
+
+---
+
+## Packages
+
+| Package                                                | Version                                                     | Description                   |
+| ------------------------------------------------------ | ----------------------------------------------------------- | ----------------------------- |
+| [@nexa-calendar/core](./packages/core/README.md)       | ![npm](https://img.shields.io/npm/v/@nexa-calendar/core)    | Domain logic, types, services |
+| [@nexa-calendar/ui](./packages/ui/README.md)           | ![npm](https://img.shields.io/npm/v/@nexa-calendar/ui)      | Lit Web Components            |
+| [@nexa-calendar/react](./packages/react/README.md)     | ![npm](https://img.shields.io/npm/v/@nexa-calendar/react)   | React wrapper                 |
+| [@nexa-calendar/vue](./packages/vue/README.md)         | ![npm](https://img.shields.io/npm/v/@nexa-calendar/vue)     | Vue 3 wrapper                 |
+| [@nexa-calendar/angular](./packages/angular/README.md) | ![npm](https://img.shields.io/npm/v/@nexa-calendar/angular) | Angular module                |
+| [@nexa-calendar/svelte](./packages/svelte/README.md)   | ![npm](https://img.shields.io/npm/v/@nexa-calendar/svelte)  | Svelte component              |
 
 ---
 
@@ -59,115 +68,57 @@ A FullCalendar alternative built with modern web standards. Full-featured calend
 
 ## Quick Start
 
+Choose your preferred framework:
+
 ### Web Components (Vanilla JS)
 
 ```bash
 npm install @nexa-calendar/ui @nexa-calendar/core
 ```
 
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <script type="module">
-      import '@nexa-calendar/ui';
-    </script>
-  </head>
-  <body>
-    <nx-calendar view="month" locale="en" theme="light"></nx-calendar>
-
-    <script>
-      const cal = document.querySelector('nx-calendar');
-      cal.events = [
-        { id: 1, title: 'Meeting', start: '2024-01-15T10:00:00', end: '2024-01-15T11:00:00' },
-      ];
-    </script>
-  </body>
-</html>
-```
+[Documentation](./packages/ui/README.md)
 
 ### React
 
 ```bash
-npm install @nexa-calendar/react @nexa-calendar/core
+npm install @nexa-calendar/react @nexa-calendar/ui @nexa-calendar/core
 ```
 
-```tsx
-import { NxCalendar } from '@nexa-calendar/react';
+[Documentation](./packages/react/README.md)
 
-function App() {
-  return (
-    <NxCalendar
-      view="month"
-      locale="en"
-      theme="dark"
-      events={[
-        { id: 1, title: 'Meeting', start: '2024-01-15T10:00:00', end: '2024-01-15T11:00:00' },
-      ]}
-    />
-  );
-}
-```
-
-### Vue
+### Vue 3
 
 ```bash
-npm install @nexa-calendar/vue @nexa-calendar/core
+npm install @nexa-calendar/vue @nexa-calendar/ui @nexa-calendar/core
 ```
 
-```vue
-<template>
-  <NxCalendar v-model:view="currentView" locale="en" :events="events" />
-</template>
-
-<script setup>
-import { NxCalendar } from '@nexa-calendar/vue';
-
-const currentView = ref('month');
-const events = ref([{ id: 1, title: 'Meeting', start: '2024-01-15T10:00:00' }]);
-</script>
-```
+[Documentation](./packages/vue/README.md)
 
 ### Angular
 
 ```bash
-npm install @nexa-calendar/angular @nexa-calendar/core
+npm install @nexa-calendar/angular @nexa-calendar/ui @nexa-calendar/core
 ```
 
-```typescript
-// app.module.ts
-import { NgxNxCalendarModule } from '@nexa-calendar/angular';
-
-@NgModule({
-  imports: [NgxNxCalendarModule],
-})
-export class AppModule {}
-```
-
-```html
-<!-- app.component.html -->
-<ngx-nx-calendar [view]="'month'" [locale]="'en'" [events]="calendarEvents"> </ngx-nx-calendar>
-```
+[Documentation](./packages/angular/README.md)
 
 ### Svelte
 
 ```bash
-npm install @nexa-calendar/svelte @nexa-calendar/core
+npm install @nexa-calendar/svelte @nexa-calendar/ui @nexa-calendar/core
 ```
 
-```svelte
-<script>
-  import NxCalendar from '@nexa-calendar/svelte'
-</script>
+[Documentation](./packages/svelte/README.md)
 
-<NxCalendar
-  view="month"
-  locale="en"
-  events={[
-    { id: 1, title: 'Meeting', start: '2024-01-15T10:00:00' }
-  ]}
-/>
+### Core (No UI)
+
+For custom implementations:
+
+```bash
+npm install @nexa-calendar/core
 ```
+
+[Documentation](./packages/core/README.md)
 
 ---
 

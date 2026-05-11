@@ -179,6 +179,7 @@ const customSetup = computed(() => ({
     '@nexa-calendar/vue': 'latest',
     '@nexa-calendar/react': 'latest',
     '@nexa-calendar/ui': 'latest',
+    '@nexa-calendar/core': 'latest',
     lit: '^3.0.0',
   },
 }));
@@ -191,6 +192,8 @@ const sandpackOptions = {
   wrapContent: false,
   closableTabs: false,
   editorHeight: 700,
+  recompileMode: 'delayed',
+  recompileDelay: 500,
 };
 
 const vueExamples: Record<string, Record<string, string>> = {
