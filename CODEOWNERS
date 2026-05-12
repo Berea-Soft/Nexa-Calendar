@@ -1,0 +1,23 @@
+# CODEOWNERS - Auto-assign reviewers
+
+# Default owner for everything
+* @Berea-Soft/maintainers
+
+# Package maintainers
+/packages/core/ @Berea-Soft/maintainers
+/packages/ui/ @Berea-Soft/maintainers
+
+# Framework wrappers
+/packages/react/ @Berea-Soft/maintainers
+/packages/vue/ @Berea-Soft/maintainers
+/packages/angular/ @Berea-Soft/maintainers
+/packages/svelte/ @Berea-Soft/maintainers
+
+# Example app
+/apps/example/ @Berea-Soft/maintainers
+
+# CI/CD
+/.github/workflows/ @Berea-Soft/devops
+
+# Documentation
+*.md @Berea-Soft/docs

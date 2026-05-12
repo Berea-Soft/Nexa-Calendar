@@ -27,7 +27,7 @@ nexa-calendar/
     angular/  — Angular wrapper
     svelte/   — Svelte wrapper
   apps/
-    example/  — Demo app with Sandpack
+    example/  — Demo app with StackBlitz SDK
 ```
 
 ## NPM Publishing
@@ -41,7 +41,7 @@ CI workflow: `.github/workflows/publish-npm.yml`
 
 ## Vercel Deployment
 
-Example app deployed via `.github/workflows/deploy-example.yml`
+Example app deployed via `.github/workflows/deploy-web.yml`
 
 - Uses `vercel@latest` CLI
 - Node 22, pnpm

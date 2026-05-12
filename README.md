@@ -10,7 +10,7 @@ A Full-featured calendar library built with Web Components (Lit 3) and React, Vu
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9+-blue.svg)](https://www.typescriptlang.org/)
 [![Lit](https://img.shields.io/badge/Lit-3.0+-blue.svg)](https://lit.dev/)
 
-[Demo](https://nexa-calendar.vercel.app) · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md)
+[Demo](https://nexa-calendar.vercel.app) · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md) · [GitHub](https://github.com/Berea-Soft/Nexa-Calendar)
 
 </div>
 
@@ -287,7 +287,6 @@ MIT License - see [LICENSE](./LICENSE) for details.
 
 - [TimeGuard](https://github.com/bereasoftware/time-guard) - Date handling with 40+ locales
 - [Lit](https://lit.dev/) - Web Component framework
-- [FullCalendar](https://fullcalendar.io/)
 
 ---
 
