@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/Berea-Soft/Nexa-Calendar/compare/v1.1.0...v1.2.0) (2026-05-12)
+
+
+### Features
+
+* add documentation files and update existing ones for improved clarity and support ([fc27e7f](https://github.com/Berea-Soft/Nexa-Calendar/commit/fc27e7faa451fef9045cbc0cf63f271a65290112))
+
 # [1.1.0](https://github.com/Berea-Soft/Nexa-Calendar/compare/v1.0.0...v1.1.0) (2026-05-11)
 
 ### Bug Fixes
